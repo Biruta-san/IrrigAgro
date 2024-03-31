@@ -1,0 +1,6 @@
+.ButtonText{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    position: relative;   
+}
