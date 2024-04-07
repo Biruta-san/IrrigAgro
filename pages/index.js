@@ -1,5 +1,5 @@
 import React from "react";
-import Login from "../src/patterns/Login";
+import Login from "../src/modules/Login/screens";
 
 const Home = () => {
     return (

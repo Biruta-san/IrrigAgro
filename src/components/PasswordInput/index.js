@@ -4,7 +4,7 @@ import { FaEye, FaEyeSlash  } from "react-icons/fa";
 import { PASSWORD_ADDON_COLOR } from '../../constants/colorConstants';
 import {PASSWORD_BUTTON_TEXT_COLOR} from '../../constants/colorConstants';
 
-const PasswordInput = ({value, onChange, id}) => {
+const PasswordInput = ({value, onChange, id, onKeyDown }) => {
     const [show, setShow] = useState(false);
     const handleClick = () => setShow(!show);
 
@@ -21,6 +21,7 @@ const PasswordInput = ({value, onChange, id}) => {
                     placeholder='Digite sua senha'
                     value={value}
                     onChange={(e) => onChange(e)}
+                    onKeyDown={onKeyDown}
                 />
                 <InputRightAddon bg={PASSWORD_ADDON_COLOR}>
                     <Button variant={{base: 'addonButton'}} h={'100%'} onClick={handleClick}>

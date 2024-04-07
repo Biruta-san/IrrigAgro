@@ -2,6 +2,7 @@ import { IoIosHome } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 import { FaGear } from "react-icons/fa6";
 import { SiPowerbi } from "react-icons/si";
+import { GiFarmer } from "react-icons/gi";
 
 const menus = [
     {
@@ -43,6 +44,14 @@ const menus = [
         icon: null,
         href: "/register",
         isVisible: false,
+    },
+    {
+        id: 5,
+        name: "Fazenda",
+        description: "Esta é a tela de cadastro de fazenda",
+        icon: GiFarmer,
+        href: "/farm/search",
+        isVisible: true,
     },
 ];
 
