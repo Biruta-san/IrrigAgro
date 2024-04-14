@@ -13,6 +13,7 @@ import {
 import { ChakraProvider, extendTheme, Flex, Center } from "@chakra-ui/react";
 import Menu from "../src/patterns/Menu";
 import { useRouter } from 'next/router';
+import { ColorModeProvider } from "../src/components/ColorModeProvider";
 
 const MyApp = ({ Component, pageProps }) => {
 
@@ -49,7 +50,7 @@ const MyApp = ({ Component, pageProps }) => {
                         _hover: {
                             bg: PASSWORD_ADDON_COLOR_HOVER,
                         },
-                        _active:{
+                        _active: {
                             bg: PASSWORD_ADDON_COLOR
                         }
                     },
@@ -59,7 +60,7 @@ const MyApp = ({ Component, pageProps }) => {
                         _hover: {
                             bg: PASSWORD_ADDON_COLOR_HOVER,
                         },
-                        _active:{
+                        _active: {
                             bg: PASSWORD_ADDON_COLOR
                         }
                     }
@@ -78,21 +79,23 @@ const MyApp = ({ Component, pageProps }) => {
 
     return (
         <ChakraProvider theme={customTheme}>
-            {(pathname === '/' || pathname === '/register') ? (
-                <Flex
-                    direction="column"
-                    align="center"
-                    justify="center"
-                    minHeight="100vh"
-                >
-                    <Component {...pageProps} />
-                </Flex>
-            ) : (
-                <Flex direction="row">
-                    <Menu />
-                    <Component {...pageProps} />
-                </Flex>
-            )}
+            <ColorModeProvider>
+                {(pathname === '/' || pathname === '/register') ? (
+                    <Flex
+                        direction="column"
+                        align="center"
+                        justify="center"
+                        minHeight="100vh"
+                    >
+                        <Component {...pageProps} />
+                    </Flex>
+                ) : (
+                    <Flex direction="row">
+                        <Menu />
+                        <Component {...pageProps} />
+                    </Flex>
+                )}
+            </ColorModeProvider>
         </ChakraProvider>
 
     );

@@ -1,6 +1,7 @@
 import React from 'react';
 import { NumberInput as CNumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Box, Text, Flex } from '@chakra-ui/react'
 import { isNullOrEmpty } from '../../utils/validate';
+import { useColorModeValue } from '../ColorModeProvider';
 
 const NumberInput = ({
     value,
@@ -11,16 +12,18 @@ const NumberInput = ({
     mr = 3
 }) => {
 
+    const { colorMode } = useColorModeValue();
+
     const handleChange = (newValueString) => {
         // Convert the new value from string to number
         const newValue = parseFloat(newValueString);
-        
+
         // Call the onChange function with the new value
         onChange(newValue);
     };
 
     return (
-        <Box mr={mr} flex="1">
+        <Box flex="1">
             <Flex direction="row" mb={"3px"}>
                 <Text>
                     {label}
@@ -34,13 +37,14 @@ const NumberInput = ({
                 variant={'outline'}
                 isRequired={isRequired}
                 placeholder={placeholder}
-                focusBorderColor={"green.400"}
+                focusBorderColor={colorMode}
                 errorBorderColor='crimson'
                 isInvalid={isNullOrEmpty(value) && isRequired}
                 value={value}
                 onChange={handleChange}
             >
                 <NumberInputField
+                    backgroundColor={"white"}
                 />
                 <NumberInputStepper>
                     <NumberIncrementStepper />

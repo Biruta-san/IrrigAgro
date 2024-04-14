@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { MENU_BG_COLOR } from "../../../constants/colorConstants";
 import PasswordInput from "../../../components/PasswordInput";
-import { logUser } from "../../../utils/firebaseSdk";
+import { logUser } from "../../../../firebaseSdk";
 import { useRouter } from 'next/router';
 import { Link } from "@chakra-ui/next-js";
 

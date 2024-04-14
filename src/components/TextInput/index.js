@@ -1,6 +1,7 @@
 import React from 'react';
 import { Input, Box, Text, Flex } from '@chakra-ui/react'
 import { isNullOrEmpty } from '../../utils/validate';
+import { useColorModeValue } from '../ColorModeProvider';
 
 const TextInput = ({ 
     value, 
@@ -10,8 +11,10 @@ const TextInput = ({
     placeholder, 
     mr = 3 
     }) => {
+    const {colorMode} = useColorModeValue();
+
     return (
-        <Box mr={mr} flex="1">
+        <Box flex="1">
             <Flex direction="row" mb={"3px"}>
                 <Text>
                     {label}
@@ -26,7 +29,8 @@ const TextInput = ({
                 variant={'outline'}
                 isRequired={isRequired}
                 placeholder={placeholder}
-                focusBorderColor={"green.400"}
+                backgroundColor={"white"}
+                focusBorderColor={colorMode}
                 errorBorderColor='crimson'
                 isInvalid={isNullOrEmpty(value) && isRequired}
             />

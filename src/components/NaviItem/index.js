@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Button, Icon, Fade } from "@chakra-ui/react";
 import Link from "../Link";
 import styles from './NaviItem.module.css';
+import { useColorModeValue } from "../ColorModeProvider";
 
 const NaviItem = ({ href, children, icon, menuActive }) => {
     const [isDisplayed, setIsDisplayed] = useState(false)
+    const { colorMode } = useColorModeValue();
 
     useEffect(() => {
         if (menuActive) {
@@ -26,7 +28,7 @@ const NaviItem = ({ href, children, icon, menuActive }) => {
                 className={styles.Button}
                 leftIcon={<Icon
                     boxSize={menuActive ? "5" : "7"}
-                    variant="menuItem"
+                    color={colorMode}
                     as={icon} />
                 }>
                 {
