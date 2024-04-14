@@ -10,7 +10,7 @@ export const ColorModeProvider = ({ children }) => {
   useEffect(() => {
     const cookies = parseCookies();
 
-    isNotNullOrEmpty(cookies.colorMode) ? setColorMode(cookies.colorMode) : setColorMode(initialColorMode);
+    isNotNullOrEmpty(cookies.colorMode) ? setColorMode(cookies.colorMode) : setColorMode('red.500');
 
   }, []);
 
