@@ -1,7 +1,7 @@
 import { Box, Icon, Input, InputGroup, InputRightAddon } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { PASSWORD_BUTTON_TEXT_COLOR } from '../../constants/colorConstants';
+import { PASSWORD_BUTTON_TEXT_COLOR } from '../../constants/styleConstants';
 import Button from '../Button';
 import { useColorModeValue } from '../ColorModeProvider';
 

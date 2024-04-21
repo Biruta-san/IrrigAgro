@@ -1,8 +1,8 @@
 /* FAZENDA */
 /* base route para desenvolvimento */
-//const API_BASE_ROUTE = 'http://localhost:3000/api';
+const API_BASE_ROUTE = 'http://localhost:3000/api';
 /* base route para produção */
-const API_BASE_ROUTE = 'https://irriga-agro.vercel.app/api';
+//const API_BASE_ROUTE = 'https://irriga-agro.vercel.app/api';
 
 /* Rotas de API de Fazendas */
 export const GET_FAZENDAS = `${API_BASE_ROUTE}/Farm/getFazendas`;

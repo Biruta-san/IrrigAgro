@@ -2,7 +2,8 @@ export const isNullOrEmpty = (value) => {
     return (value === '' || 
             value === null || 
             value === undefined || 
-            value === 0
+            value === 0 ||
+            value.length === 0
         );
 };
 

@@ -3,10 +3,22 @@ import { Button, Icon, Fade } from "@chakra-ui/react";
 import Link from "../Link";
 import styles from './NaviItem.module.css';
 import { useColorModeValue } from "../ColorModeProvider";
+import {
+    MENU_BG_DARK_COLOR,
+    MENU_BG_LIGHT_COLOR,
+    MENU_ITEM_ACTIVE_DARK_TEXT_COLOR,
+    MENU_ITEM_ACTIVE_LIGHT_TEXT_COLOR,
+    MENU_ITEM_BG_DARK_COLOR_ACTIVE,
+    MENU_ITEM_BG_DARK_COLOR_HOVER,
+    MENU_ITEM_BG_LIGHT_COLOR_ACTIVE,
+    MENU_ITEM_BG_LIGHT_COLOR_HOVER,
+    MENU_ITEM_TEXT_DARK_COLOR,
+    MENU_ITEM_TEXT_LIGHT_COLOR
+} from "../../constants/styleConstants";
 
 const NaviItem = ({ href, children, icon, menuActive }) => {
     const [isDisplayed, setIsDisplayed] = useState(false)
-    const { colorMode } = useColorModeValue();
+    const { colorMode, theme } = useColorModeValue();
 
     useEffect(() => {
         if (menuActive) {
@@ -23,8 +35,22 @@ const NaviItem = ({ href, children, icon, menuActive }) => {
             <Button
                 borderRadius="0px"
                 w="100%"
-                variant={{ base: "menuItem" }}
-                style={{ justifyContent: "flex-start", alignItems: "center" }}
+                bg={theme == 'light' ? MENU_BG_LIGHT_COLOR : MENU_BG_DARK_COLOR}
+                _focus={{
+                    backgroundColor: theme == 'light' ? MENU_ITEM_BG_LIGHT_COLOR_ACTIVE : MENU_ITEM_BG_DARK_COLOR_ACTIVE,
+                    color: theme == 'light' ? MENU_ITEM_ACTIVE_LIGHT_TEXT_COLOR : MENU_ITEM_ACTIVE_DARK_TEXT_COLOR,
+                }}
+                _hover={{
+                    backgroundColor: theme == 'light' ? MENU_ITEM_BG_LIGHT_COLOR_HOVER : MENU_ITEM_BG_DARK_COLOR_HOVER,
+                    color: theme == 'light' ? MENU_ITEM_ACTIVE_LIGHT_TEXT_COLOR : MENU_ITEM_ACTIVE_DARK_TEXT_COLOR
+
+                }}
+                _before={{ color: theme == 'light' ? MENU_ITEM_TEXT_LIGHT_COLOR : MENU_ITEM_TEXT_DARK_COLOR }}
+                style={{
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                    color: theme == 'light' ? '' : MENU_ITEM_TEXT_DARK_COLOR
+                }}
                 className={styles.Button}
                 leftIcon={
                     <Icon
@@ -43,7 +69,7 @@ const NaviItem = ({ href, children, icon, menuActive }) => {
                     </Fade>
                 }
             </Button>
-        </Link>
+        </Link >
     );
 }
 

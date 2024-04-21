@@ -8,7 +8,7 @@ import {
     Flex,
     Center
 } from "@chakra-ui/react";
-import { MENU_BG_COLOR } from "../../../constants/colorConstants";
+import { MENU_BG_LIGHT_COLOR } from "../../../constants/styleConstants";
 import PasswordInput from "../../../components/PasswordInput";
 import { createUser } from "../../../../firebaseSdk";
 import { useRouter } from 'next/router';
@@ -66,7 +66,7 @@ const Registro = () => {
         <Center h="100vh">
             <Flex 
                 w='50vw' 
-                bg={MENU_BG_COLOR} 
+                bg={MENU_BG_LIGHT_COLOR} 
                 borderRadius={'20px'} 
                 direction={'column'} 
                 align={'center'} 

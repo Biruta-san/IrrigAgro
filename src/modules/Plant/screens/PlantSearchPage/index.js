@@ -7,9 +7,10 @@ import NumberInput from '../../../../components/NumberInput';
 import TextDescriptionValue from '../../../../components/TextDescriptionValue';
 import TextInput from '../../../../components/TextInput';
 import { GET_PLANTAS } from '../../../../constants/apiRoutes';
-import { PANEL_COLOR } from '../../../../constants/colorConstants';
+import { PANEL_LIGHT_COLOR } from '../../../../constants/styleConstants';
 import DataCard from '../../../../patterns/DataCard';
 import { isNotNullOrEmpty } from '../../../../utils/validate';
+import Panel from '../../../../components/Panel';
 
 const PlantSearchPage = () => {
 
@@ -99,7 +100,7 @@ const PlantSearchPage = () => {
 
     return (
         <Flex w={"100%"} direction={"column"} align={"center"} justify={"flex-start"}>
-            <Box m={"10px"} w={"90%"} backgroundColor={PANEL_COLOR} borderRadius={"10px"}>
+            <Panel>
                 <Flex padding={"10px"} gap='10px' direction={"column"} >
                     <Flex direction={'row'} wrap={'wrap'} gap={"10px"}>
                         <Box style={{ flexGrow: 1, flexBasis: 200 }}>
@@ -122,24 +123,26 @@ const PlantSearchPage = () => {
                         </Link>
                     </Flex>
                 </Flex>
-            </Box>
-            {isNotNullOrEmpty(data) && <Box m={"10px"} w={"90%"} backgroundColor={PANEL_COLOR} borderRadius={"10px"}>
-                <Stack m={"20px"} spacing={4}>
-                    {
-                        data.map((item, index) => {
-                            return (
-                                <Box key={index}>
-                                    <DataCard hrefEdit={`/plant/edit/${item.id}`} heading={item.nome}>
-                                        <TextDescriptionValue description={"Descricao"} value={item.descricao} />
-                                        <TextDescriptionValue description={"Temperatura Recomendada"} value={item.umidadeRecomendada} />
-                                        <TextDescriptionValue description={"Umidade Recomendada"} value={item.temperaturaRecomendada} />
-                                    </DataCard>
-                                </Box>
-                            )
-                        })
-                    }
-                </Stack>
-            </Box>}
+            </Panel>
+            {isNotNullOrEmpty(data) && (
+                <Panel>
+                    <Stack m={"20px"} spacing={4}>
+                        {
+                            data.map((item, index) => {
+                                return (
+                                    <Box key={index}>
+                                        <DataCard hrefEdit={`/plant/edit/${item.id}`} heading={item.nome}>
+                                            <TextDescriptionValue description={"Descricao"} value={item.descricao} />
+                                            <TextDescriptionValue description={"Temperatura Recomendada"} value={item.umidadeRecomendada} />
+                                            <TextDescriptionValue description={"Umidade Recomendada"} value={item.temperaturaRecomendada} />
+                                        </DataCard>
+                                    </Box>
+                                )
+                            })
+                        }
+                    </Stack>
+                </Panel>
+            )}
         </Flex>
     );
 }

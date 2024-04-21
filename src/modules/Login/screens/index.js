@@ -13,7 +13,7 @@ import React, { useState } from "react";
 import { logUser } from "../../../../firebaseSdk";
 import Button from '../../../components/Button';
 import PasswordInput from "../../../components/PasswordInput";
-import { MENU_BG_COLOR } from "../../../constants/colorConstants";
+import { MENU_BG_LIGHT_COLOR } from "../../../constants/styleConstants";
 import TextInput from "../../../components/TextInput";
 
 const Login = () => {
@@ -65,7 +65,7 @@ const Login = () => {
         <Center h="100vh">
             <Flex 
                 w='50vw' 
-                bg={MENU_BG_COLOR} 
+                bg={MENU_BG_LIGHT_COLOR} 
                 borderRadius={'20px'} 
                 direction={'column'} 
                 align={'center'} 

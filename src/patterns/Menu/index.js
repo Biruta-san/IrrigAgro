@@ -3,29 +3,36 @@ import NaviItem from "../../components/NaviItem";
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { Flex, Button as ChakraButton, Box } from "@chakra-ui/react";
 import {
-    MENU_BG_COLOR,
+    MENU_BG_LIGHT_COLOR,
+    MENU_BG_DARK_COLOR,
     MENU_WIDE_WIDTH,
     MENU_WIDE_WIDTH_COLLAPSED,
-    MENU_TRANSITION
-} from '../../constants/colorConstants';
+    MENU_TRANSITION,
+    MENU_BG_BORDER_LIGHT_COLOR,
+    MENU_BG_BORDER_DARK_COLOR,
+    MENU_ITEM_ACTIVE_LIGHT_TEXT_COLOR,
+    MENU_ITEM_ACTIVE_DARK_TEXT_COLOR,
+    MENU_ITEM_BG_LIGHT_COLOR_HOVER,
+    MENU_ITEM_BG_DARK_COLOR_HOVER
+} from '../../constants/styleConstants';
 import menuRoutes from '../../constants/menuRoutes';
 import { useColorModeValue } from "../../components/ColorModeProvider";
-import Button from "../../components/Button";
 
-const Menu = ({menuActive, setMenuActive}) => {
+const Menu = ({ menuActive, setMenuActive }) => {
 
     const handleClick = () => {
         setMenuActive(!menuActive);
     }
 
-    const { colorMode, setColorMode } = useColorModeValue();
+    const { colorMode, theme } = useColorModeValue();
 
     return (
         <Box
-            bg={MENU_BG_COLOR}
+            bg={theme == 'light' ? MENU_BG_LIGHT_COLOR : MENU_BG_DARK_COLOR
+            }
             h='100vh'
             w={menuActive ? MENU_WIDE_WIDTH : MENU_WIDE_WIDTH_COLLAPSED}
-            style={{ transition: MENU_TRANSITION }}
+            style={{ transition: `${MENU_TRANSITION}`, borderRight: `1px solid ${theme == 'light' ? MENU_BG_BORDER_LIGHT_COLOR : MENU_BG_BORDER_DARK_COLOR}`, transition: 'background-color 0.2s' }}
             position={"fixed"}
             display={'block'}
             top={0}
@@ -39,7 +46,11 @@ const Menu = ({menuActive, setMenuActive}) => {
                     <Flex direction="row" wrap="wrap" align="center">
                         <ChakraButton
                             onClick={handleClick}
-                            variant={{ base: "menuCollapse" }}
+                            backgroundColor={theme == 'light' ? MENU_BG_LIGHT_COLOR : MENU_BG_DARK_COLOR}
+                            _hover={{
+                                backgroundColor: theme == 'light' ? MENU_ITEM_BG_LIGHT_COLOR_HOVER : MENU_ITEM_BG_DARK_COLOR_HOVER,
+                                color: theme == 'light' ? MENU_ITEM_ACTIVE_LIGHT_TEXT_COLOR : MENU_ITEM_ACTIVE_DARK_TEXT_COLOR
+                            }}
                         >
                             <HamburgerIcon color={colorMode} />
                         </ChakraButton>
@@ -64,7 +75,7 @@ const Menu = ({menuActive, setMenuActive}) => {
                     )
                 ))}
             </Flex>
-        </Box>
+        </Box >
 
     );
 }
