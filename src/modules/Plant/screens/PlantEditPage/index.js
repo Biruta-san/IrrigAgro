@@ -1,4 +1,4 @@
-import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
+import { Box, Flex, SimpleGrid, useToast } from "@chakra-ui/react";
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -9,16 +9,18 @@ import TextInput from '../../../../components/TextInput';
 import { BASE_ROUTE_PLANTA } from '../../../../constants/apiRoutes';
 import { PANEL_COLOR } from '../../../../constants/colorConstants';
 
-const PlantEditPage = ({id, nome, descricao, temperaturaRecomendada, umidadeRecomendada}) => {
+const PlantEditPage = ({ id, nome, descricao, temperaturaRecomendada, umidadeRecomendada }) => {
 
     const router = useRouter();
 
+    const toast = useToast();
+
     const [campos, setCampos] = useState({
-      id: id,
-      nome: nome,
-      descricao: descricao,
-      temperaturaRecomendada: temperaturaRecomendada,
-      umidadeRecomendada: umidadeRecomendada
+        id: id,
+        nome: nome,
+        descricao: descricao,
+        temperaturaRecomendada: temperaturaRecomendada,
+        umidadeRecomendada: umidadeRecomendada
     });
 
     const [loading, setLoading] = useState(false);
@@ -31,11 +33,45 @@ const PlantEditPage = ({id, nome, descricao, temperaturaRecomendada, umidadeReco
     }
 
     const putData = async () => {
-        try{
+        try {
             setLoading(true);
+            toast({
+                title: "Atualizando planta...",
+                status: "info",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom-right",
+                variant: "left-accent"
+            });
             const response = await axios.put(`${BASE_ROUTE_PLANTA}/${campos.id}`, campos);
+            if (response.data.status === 1)
+                toast({
+                    title: "Planta atualizada com sucesso",
+                    status: "success",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom-right",
+                    variant: "left-accent"
+                })
+            else if (response.data.status === -1)
+                toast({
+                    title: "Erro ao atualizar planta",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom-right",
+                    variant: "left-accent"
+                });
         } catch (error) {
             console.error('Error inserting data:', error);
+            toast({
+                title: "Erro ao atualizar planta",
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom-right",
+                variant: "left-accent"
+            });
         } finally {
             setLoading(false);
             router.push('/plant/search');

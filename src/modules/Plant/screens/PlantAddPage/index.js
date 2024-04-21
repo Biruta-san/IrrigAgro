@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
+import React, { useState } from 'react';
+import { Box, Flex, SimpleGrid, useToast } from "@chakra-ui/react";
 import TextInput from '../../../../components/TextInput';
 import NumberInput from '../../../../components/NumberInput';
 import Button from '../../../../components/Button';
@@ -12,6 +12,8 @@ import { useRouter } from 'next/router';
 const PlantAddPage = () => {
 
     const router = useRouter();
+
+    const toast = useToast();
 
     const [campos, setCampos] = useState({
         nome: "",
@@ -30,11 +32,45 @@ const PlantAddPage = () => {
     }
 
     const postData = async () => {
-        try{
+        try {
             setLoading(true);
+            toast({
+                title: "Adicionando planta...",
+                status: "info",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom-right",
+                variant: "left-accent"
+            });
             const response = await axios.post(POST_PLANTA, campos);
+            if (response.data.status === 1)
+                toast({
+                    title: "Planta Adicionada com sucesso",
+                    status: "success",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom-right",
+                    variant: "left-accent"
+                })
+            else if (response.data.status === -1)
+                toast({
+                    title: "Erro ao adicionar planta",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom-right",
+                    variant: "left-accent"
+                });
         } catch (error) {
             console.error('Error inserting data:', error);
+            toast({
+                title: "Erro ao atualizar planta",
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom-right",
+                variant: "left-accent"
+            });
         } finally {
             setLoading(false);
             router.push('/plant/search');

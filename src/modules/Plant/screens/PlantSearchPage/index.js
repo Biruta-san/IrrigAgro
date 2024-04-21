@@ -1,4 +1,4 @@
-import { Box, Flex, SimpleGrid, Stack } from '@chakra-ui/react';
+import { Box, Flex, Stack, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Button from '../../../../components/Button';
@@ -12,6 +12,8 @@ import DataCard from '../../../../patterns/DataCard';
 import { isNotNullOrEmpty } from '../../../../utils/validate';
 
 const PlantSearchPage = () => {
+
+    const toast = useToast();
 
     const [campos, setCampos] = useState({
         nome: "",
@@ -41,7 +43,14 @@ const PlantSearchPage = () => {
     const getData = async () => {
         try {
             setLoading(true);
-
+            toast({
+                title: "Pesquisando plantas...",
+                status: "info",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom-right",
+                variant: "left-accent"
+            });
             const response = await axios.get(GET_PLANTAS, {
                 params: campos
             });
@@ -54,9 +63,35 @@ const PlantSearchPage = () => {
                     temperaturaRecomendada: item.PLNT_TemperaturaRecomendada
                 }
             });
+            if (response.data.status === 1)
+                toast({
+                    title: "Plantas pesquisadas com sucesso",
+                    status: "success",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom-right",
+                    variant: "left-accent"
+                })
+            else if (response.data.status === -1)
+                toast({
+                    title: "Erro ao pesquisar plantas",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom-right",
+                    variant: "left-accent"
+                });
             setData(dataFormated);
         } catch (error) {
             console.error('Error inserting data:', error);
+            toast({
+                title: "Erro ao pesquisar plantas",
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom-right",
+                variant: "left-accent"
+            });
         } finally {
             setLoading(false);
         }
