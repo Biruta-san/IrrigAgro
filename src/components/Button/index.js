@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import { SearchIcon, SmallAddIcon, SmallCloseIcon } from "@chakra-ui/icons";
 import { Button as ChakraButton } from "@chakra-ui/react";
+import React from "react";
 import { useColorModeValue } from "../ColorModeProvider";
-import { SmallCloseIcon, SmallAddIcon } from "@chakra-ui/icons";
 
 const Button = (props) => {
 
-    const { colorMode, setColorMode } = useColorModeValue();
+    const { colorMode } = useColorModeValue();
 
     if(props.type == "cancel") {
         return (
@@ -39,12 +39,28 @@ const Button = (props) => {
             </ChakraButton>
         )
     }
+
+    else if(props.type == "search"){
+        return (
+            <ChakraButton
+                variant={"outline"}
+                borderColor={"blue.400"}
+                _hover={{backgroundColor: "blue.400"}}
+                _active={{backgroundColor: "blue.600"}}
+                leftIcon={<SearchIcon color="blue.500"/>}
+                minWidth={"50px"}
+                maxWidth={"150px"}
+                {...props}
+            >
+            {props.children}
+        </ChakraButton>
+        );
+    }
+
     else {
         return (
             <ChakraButton
                 backgroundColor={colorMode}
-                minWidth={"50px"}
-                maxWidth={"150px"}
                 {...props}
             >
                 {props.children}

@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import { Link } from "@chakra-ui/next-js";
 import {
     Box,
-    FormControl,
-    FormLabel,
-    FormHelperText,
-    Input,
-    Button,
+    Center,
     Flex,
-    Center
+    FormControl,
+    FormHelperText,
+    FormLabel,
+    Input
 } from "@chakra-ui/react";
-import { MENU_BG_COLOR } from "../../../constants/colorConstants";
-import PasswordInput from "../../../components/PasswordInput";
-import { logUser } from "../../../../firebaseSdk";
 import { useRouter } from 'next/router';
-import { Link } from "@chakra-ui/next-js";
+import React, { useState } from "react";
+import { logUser } from "../../../../firebaseSdk";
+import Button from '../../../components/Button';
+import PasswordInput from "../../../components/PasswordInput";
+import { MENU_BG_COLOR } from "../../../constants/colorConstants";
+import TextInput from "../../../components/TextInput";
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -47,7 +48,7 @@ const Login = () => {
                 alert(user);
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
         } finally {
             setLoading(false);
         }
@@ -75,7 +76,7 @@ const Login = () => {
                     <Flex w='100%' direction={'column'} gap='10px'>
                         <Box w='100%'>
                             <FormLabel>Email</FormLabel>
-                            <Input 
+                            <TextInput 
                                 id="email-input" 
                                 type="email" 
                                 placeholder="Digite seu email" 
@@ -95,9 +96,7 @@ const Login = () => {
                             />
                         </Box>
                         <Button 
-                            onClick={handleSubmit} 
-                            variant={{ base: 'submitButton' }} 
-                            type="submit" 
+                            onClick={handleSubmit}
                             isLoading={loading}
                         >
                             Login
@@ -107,7 +106,6 @@ const Login = () => {
                             w='100%'
                         >
                             <Button 
-                                variant={{ base: 'submitButton' }} 
                                 w={'100%'}
                             >
                                 Registrar

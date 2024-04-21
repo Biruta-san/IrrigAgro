@@ -15,7 +15,6 @@ async function connectToDatabase() {
         };
 
         const connection = await sql.connect(`Server=${config.server},${config.port};Database=${config.database};User Id=${config.user};Password=${config.password};Encrypt=${config.options.encrypt}`);
-        console.log('Connected');
         return connection;
     } catch (error) {
         console.error('Error connecting to the database:', error);

@@ -1,7 +1,6 @@
 const { connectToDatabase } = require('../../../connectToDatabase');
 
 export default async function handler(req, res) {
-    console.log(req.body);
     if (req.method === 'POST') {
         try {
             const pool = await connectToDatabase();
@@ -31,11 +30,10 @@ export default async function handler(req, res) {
                     )`
                 );
 
-            res.status(200).json({ success: true, message: 'Data inserted successfully' });
+            res.status(200).json({ status: 1, message: 'Dados Inseridos com sucesso' });
 
         } catch (error) {
-            console.error('Error inserting data:', error);
-            res.status(500).json({ success: false, message: 'Internal server error' });
+            res.status(500).json({ status: -1, message: 'Internal server error', error: error.message });
         }
     } else {
         res.setHeader('Allow', ['POST']);

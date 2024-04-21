@@ -1,8 +1,8 @@
 import hexToRgba from "hex-to-rgba";
 
 export const MENU_BG_COLOR = "#f6f7f9";
-export const MENU_WIDE_WIDTH = "12vw";
-export const MENU_WIDE_WIDTH_COLLAPSED = "3.2vw";
+export const MENU_WIDE_WIDTH = "220px";
+export const MENU_WIDE_WIDTH_COLLAPSED = "60px";
 export const MENU_TRANSITION = "width 0.5s";
 
 export const MENU_ITEM_BG_COLOR = MENU_BG_COLOR;

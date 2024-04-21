@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     MENU_ITEM_BG_COLOR,
     MENU_ITEM_BG_COLOR_ACTIVE,
@@ -8,16 +8,21 @@ import {
     MENU_ITEM_ACTIVE_TEXT_COLOR,
     PASSWORD_ADDON_COLOR,
     PASSWORD_ADDON_COLOR_HOVER,
-    PASSWORD_BUTTON_TEXT_COLOR
+    PASSWORD_BUTTON_TEXT_COLOR,
+    MENU_WIDE_WIDTH,
+    MENU_WIDE_WIDTH_COLLAPSED
 } from '../src/constants/colorConstants'
-import { ChakraProvider, extendTheme, Flex, Center } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme, Flex, Center, Grid, GridItem, Box, Text } from "@chakra-ui/react";
 import Menu from "../src/patterns/Menu";
 import { useRouter } from 'next/router';
 import { ColorModeProvider } from "../src/components/ColorModeProvider";
+import Header from "../src/patterns/Header";
 
 const MyApp = ({ Component, pageProps }) => {
 
     const { pathname } = useRouter();
+
+    const [menuActive, setMenuActive] = useState(true);
 
     const customTheme = extendTheme({
         components: {
@@ -90,10 +95,26 @@ const MyApp = ({ Component, pageProps }) => {
                         <Component {...pageProps} />
                     </Flex>
                 ) : (
-                    <Flex direction="row">
-                        <Menu />
-                        <Component {...pageProps} />
-                    </Flex>
+                    <>
+                        <Grid
+                            h='100vh'
+                            gridTemplateRows={'auto 1fr auto'}
+                            gridTemplateColumns={'auto 1fr'}
+                            color='blackAlpha.700'
+                            fontWeight='bold'
+                        >
+                            <GridItem rowSpan={2} colSpan={1}>
+                                <Menu menuActive={menuActive} setMenuActive={setMenuActive} />
+                            </GridItem>
+
+                            <GridItem style={{ marginLeft: menuActive ? MENU_WIDE_WIDTH : MENU_WIDE_WIDTH_COLLAPSED, transition: "margin 0.5s" }} rowSpan={1} colSpan={1}>
+                                <Header />
+                            </GridItem>
+                            <GridItem style={{ marginLeft: menuActive ? MENU_WIDE_WIDTH : MENU_WIDE_WIDTH_COLLAPSED, transition: "margin 0.5s" }} rowSpan={1} colSpan={1}>
+                                <Component {...pageProps} />
+                            </GridItem>
+                        </Grid>
+                    </>
                 )}
             </ColorModeProvider>
         </ChakraProvider>

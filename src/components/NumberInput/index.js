@@ -43,9 +43,7 @@ const NumberInput = ({
                 value={value}
                 onChange={handleChange}
             >
-                <NumberInputField
-                    backgroundColor={"white"}
-                />
+                <NumberInputField/>
                 <NumberInputStepper>
                     <NumberIncrementStepper />
                     <NumberDecrementStepper />

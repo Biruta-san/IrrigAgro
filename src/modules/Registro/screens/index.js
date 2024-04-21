@@ -5,7 +5,6 @@ import {
     FormLabel,
     FormHelperText,
     Input,
-    Button,
     Flex,
     Center
 } from "@chakra-ui/react";
@@ -14,6 +13,8 @@ import PasswordInput from "../../../components/PasswordInput";
 import { createUser } from "../../../../firebaseSdk";
 import { useRouter } from 'next/router';
 import { Link } from "@chakra-ui/next-js";
+import Button from '../../../components/Button';
+import TextInput from '../../../components/TextInput';
 
 const Registro = () => {
 
@@ -55,7 +56,7 @@ const Registro = () => {
                 alert(user);
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
         } finally {
             setLoading(false);
         }
@@ -80,7 +81,7 @@ const Registro = () => {
                     >
                         <Box w='100%'>
                             <FormLabel>Email</FormLabel>
-                            <Input
+                            <TextInput
                                 id="email-input"
                                 type="email"
                                 placeholder="Digite seu email"
@@ -101,9 +102,7 @@ const Registro = () => {
                             />
                         </Box>
                         <Button 
-                            onClick={handleSubmit} 
-                            variant={{ base: 'submitButton' }} 
-                            type="submit" 
+                            onClick={handleSubmit}
                             isLoading={loading}
                         >
                             Registrar
@@ -111,8 +110,7 @@ const Registro = () => {
                         <Link 
                             href='/' 
                             w='100%'>
-                            <Button 
-                                variant={{ base: 'submitButton' }} 
+                            <Button
                                 w={'100%'}
                             >
                                 Realizar Login

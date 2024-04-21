@@ -26,10 +26,13 @@ const NaviItem = ({ href, children, icon, menuActive }) => {
                 variant={{ base: "menuItem" }}
                 style={{ justifyContent: "flex-start", alignItems: "center" }}
                 className={styles.Button}
-                leftIcon={<Icon
-                    boxSize={menuActive ? "5" : "7"}
-                    color={colorMode}
-                    as={icon} />
+                leftIcon={
+                    <Icon
+                        boxSize={menuActive ? "5" : "7"}
+                        style={{ transition: "width 0.5s , height 0.5s" }}
+                        color={colorMode}
+                        as={icon}
+                    />
                 }>
                 {
                     isDisplayed &&

@@ -29,7 +29,6 @@ const TextInput = ({
                 variant={'outline'}
                 isRequired={isRequired}
                 placeholder={placeholder}
-                backgroundColor={"white"}
                 focusBorderColor={colorMode}
                 errorBorderColor='crimson'
                 isInvalid={isNullOrEmpty(value) && isRequired}

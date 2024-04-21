@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import { Input, InputGroup, Button, InputRightAddon, Icon, Box } from '@chakra-ui/react';
-import { FaEye, FaEyeSlash  } from "react-icons/fa";
-import { PASSWORD_ADDON_COLOR } from '../../constants/colorConstants';
-import {PASSWORD_BUTTON_TEXT_COLOR} from '../../constants/colorConstants';
+import { Box, Icon, Input, InputGroup, InputRightAddon } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { PASSWORD_BUTTON_TEXT_COLOR } from '../../constants/colorConstants';
+import Button from '../Button';
 import { useColorModeValue } from '../ColorModeProvider';
 
 const PasswordInput = ({value, onChange, id, onKeyDown }) => {
@@ -12,7 +12,7 @@ const PasswordInput = ({value, onChange, id, onKeyDown }) => {
 
 
     const ShowIcon = () => {
-        return <Icon color={PASSWORD_BUTTON_TEXT_COLOR} as={show ? FaEye : FaEyeSlash} />;
+        return <Icon color={'#000'} as={show ? FaEye : FaEyeSlash} />;
     }
 
     return (
@@ -27,8 +27,8 @@ const PasswordInput = ({value, onChange, id, onKeyDown }) => {
                     onChange={(e) => onChange(e)}
                     onKeyDown={onKeyDown}
                 />
-                <InputRightAddon bg={PASSWORD_ADDON_COLOR}>
-                    <Button variant={{base: 'addonButton'}} h={'100%'} onClick={handleClick}>
+                <InputRightAddon bg={colorMode}>
+                    <Button h={'100%'} onClick={handleClick}>
                         <ShowIcon />
                     </Button>
                 </InputRightAddon>

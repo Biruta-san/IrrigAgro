@@ -2,17 +2,15 @@ const { connectToDatabase } = require('../../../connectToDatabase');
 
 export default async function handler(req, res) {
     try {
-        // Connect to the database
+        // Conectar ao banco de dados
         const pool = await connectToDatabase();
-        console.log(pool);
 
-        // Execute the SQL query
+        // Executar o comando SQL
         const result = await pool.request().query('SELECT * FROM Sensor');
 
-        console.log('Query executed successfully. Row count:', result.recordset.length);
-        res.status(200).json({ success: true, rowCount: result.recordset.length, rows: result.recordset });
+        res.status(200).json({ status: 1, rowCount: result.recordset.length, rows: result.recordset, message: 'Sensores retornados com sucesso'});
     } catch (error) {
         console.error('Error executing query:', error);
-        res.status(500).json({ success: false, message: error.message});
+        res.status(500).json({ status: -1, message: 'Ocorreu um erro no servidor', error: error.message});
     }
 };

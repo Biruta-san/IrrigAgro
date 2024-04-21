@@ -1,16 +1,17 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { setCookie,parseCookies } from 'nookies';
 import { isNotNullOrEmpty } from '../../utils/validate';
+import { MENU_ITEM_ICON_COLOR } from '../../constants/colorConstants';
+
 
 const ColorModeContext = createContext();
 
 export const ColorModeProvider = ({ children }) => {
-  const [colorMode, setColorMode] = useState('red.500');
+  const [colorMode, setColorMode] = useState(MENU_ITEM_ICON_COLOR);
 
   useEffect(() => {
     const cookies = parseCookies();
-
-    isNotNullOrEmpty(cookies.colorMode) ? setColorMode(cookies.colorMode) : setColorMode('red.500');
+    isNotNullOrEmpty(cookies.colorMode) ? setColorMode(cookies.colorMode) : setColorMode(MENU_ITEM_ICON_COLOR);
 
   }, []);
 
