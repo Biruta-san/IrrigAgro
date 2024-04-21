@@ -1,18 +1,18 @@
 import { Box, Icon, Input, InputGroup, InputRightAddon } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { PASSWORD_BUTTON_TEXT_COLOR } from '../../constants/styleConstants';
+import { MENU_TEXT_DARK_COLOR, MENU_TEXT_LIGHT_COLOR } from '../../constants/styleConstants';
 import Button from '../Button';
 import { useColorModeValue } from '../ColorModeProvider';
 
 const PasswordInput = ({value, onChange, id, onKeyDown }) => {
     const [show, setShow] = useState(false);
     const handleClick = () => setShow(!show);
-    const {colorMode} = useColorModeValue();
+    const {colorMode, theme} = useColorModeValue();
 
 
     const ShowIcon = () => {
-        return <Icon color={'#000'} as={show ? FaEye : FaEyeSlash} />;
+        return <Icon color={theme == 'light' ? MENU_TEXT_LIGHT_COLOR : MENU_TEXT_DARK_COLOR} as={show ? FaEye : FaEyeSlash} />;
     }
 
     return (
@@ -24,6 +24,7 @@ const PasswordInput = ({value, onChange, id, onKeyDown }) => {
                     placeholder='Digite sua senha'
                     focusBorderColor={colorMode}
                     value={value}
+                    color={theme == 'light' ? MENU_TEXT_LIGHT_COLOR : MENU_TEXT_DARK_COLOR}
                     onChange={(e) => onChange(e)}
                     onKeyDown={onKeyDown}
                 />

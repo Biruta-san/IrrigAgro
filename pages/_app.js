@@ -26,6 +26,11 @@ const MyApp = ({ Component, pageProps }) => {
                         align="center"
                         justify="center"
                         minHeight="100vh"
+                        bg={() => {
+                            const { theme } = useColorModeValue();
+                            return theme == 'light' ? BG_LIGHT_COLOR : BG_DARK_COLOR
+                        }}
+                        style={{ transition: "margin 0.5s", transition: 'background-color 0.2s' }}
                     >
                         <Component {...pageProps} />
                     </Flex>

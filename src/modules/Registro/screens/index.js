@@ -8,19 +8,23 @@ import {
     Flex,
     Center
 } from "@chakra-ui/react";
-import { MENU_BG_LIGHT_COLOR } from "../../../constants/styleConstants";
+import { MENU_BG_LIGHT_COLOR, MENU_TEXT_DARK_COLOR, MENU_TEXT_LIGHT_COLOR } from "../../../constants/styleConstants";
 import PasswordInput from "../../../components/PasswordInput";
 import { createUser } from "../../../../firebaseSdk";
 import { useRouter } from 'next/router';
 import { Link } from "@chakra-ui/next-js";
 import Button from '../../../components/Button';
 import TextInput from '../../../components/TextInput';
+import { useColorModeValue } from "../../../components/ColorModeProvider";
+import Panel from "../../../components/Panel";
 
 const Registro = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+
+    const { theme } = useColorModeValue();
 
     const router = useRouter();
 
@@ -64,61 +68,61 @@ const Registro = () => {
 
     return (
         <Center h="100vh">
-            <Flex 
-                w='50vw' 
-                bg={MENU_BG_LIGHT_COLOR} 
-                borderRadius={'20px'} 
-                direction={'column'} 
-                align={'center'} 
-                justify={'center'} 
-                p={8}
-            >
-                <FormControl>
-                    <Flex 
-                        w='100%' 
-                        direction={'column'} 
-                        gap='10px'
-                    >
-                        <Box w='100%'>
-                            <FormLabel>Email</FormLabel>
-                            <TextInput
-                                id="email-input"
-                                type="email"
-                                placeholder="Digite seu email"
-                                value={email}
-                                onKeyDown={handleKeyPress}
-                                onChange={(e) => handleEmail(e)}
-                            />
-                            <FormHelperText>Nunca iremos compartilhar seu email</FormHelperText>
-                        </Box>
-                        <Box 
+            <Panel
+                w='50vw'>
+                <Flex
+                    direction={'column'}
+                    align={'center'}
+                    justify={'center'}
+                    p={8}
+                >
+                    <FormControl>
+                        <Flex
                             w='100%'
+                            direction={'column'}
+                            gap='10px'
                         >
-                            <FormLabel>Senha</FormLabel>
-                            <PasswordInput
-                                id="password-input" 
-                                value={password} 
-                                onChange={handlePassword} 
-                            />
-                        </Box>
-                        <Button 
-                            onClick={handleSubmit}
-                            isLoading={loading}
-                        >
-                            Registrar
-                        </Button>
-                        <Link 
-                            href='/' 
-                            w='100%'>
-                            <Button
-                                w={'100%'}
+                            <Box w='100%'>
+                                <FormLabel color={theme == 'light' ? MENU_TEXT_LIGHT_COLOR : MENU_TEXT_DARK_COLOR}>Email</FormLabel>
+                                <TextInput
+                                    id="email-input"
+                                    type="email"
+                                    placeholder="Digite seu email"
+                                    value={email}
+                                    onKeyDown={handleKeyPress}
+                                    onChange={(e) => handleEmail(e)}
+                                />
+                                <FormHelperText>Nunca iremos compartilhar seu email</FormHelperText>
+                            </Box>
+                            <Box
+                                w='100%'
                             >
-                                Realizar Login
+                                <FormLabel color={theme == 'light' ? MENU_TEXT_LIGHT_COLOR : MENU_TEXT_DARK_COLOR}>Senha</FormLabel>
+                                <PasswordInput
+                                    id="password-input"
+                                    value={password}
+                                    onChange={handlePassword}
+                                />
+                            </Box>
+                            <Button
+                                onClick={handleSubmit}
+                                isLoading={loading}
+                            >
+                                Registrar
                             </Button>
-                        </Link>
-                    </Flex>
-                </FormControl>
-            </Flex>
+                            <Link
+                                href='/'
+                                w='100%'>
+                                <Button
+                                    w={'100%'}
+                                >
+                                    Realizar Login
+                                </Button>
+                            </Link>
+                        </Flex>
+                    </FormControl>
+                </Flex>
+            </Panel>
         </Center>
     );
 }
