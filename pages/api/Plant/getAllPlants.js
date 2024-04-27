@@ -20,8 +20,8 @@ export default async function handler(req, res) {
                       AND (PLNT_UmidadeRecomendada = ISNULL(@umidadeRecomendada,0) OR ISNULL(@umidadeRecomendada,0) = 0)
                       AND (PLNT_TemperaturaRecomendada = ISNULL(@temperaturaRecomendada,0) OR ISNULL(@temperaturaRecomendada,0) = 0)
                     `);
-        res.status(200).json({ status: 1, rowCount: result.recordset.length, rows: result.recordset, message: 'Planta(s) retornadas com sucesso'});
+        res.status(200).json({ status: 1, rowCount: result.recordset.length, rows: result.recordset, message: 'Planta(s) retornada(s) com sucesso' });
     } catch (error) {
-        res.status(500).json({ status: -1, message: 'Ocorreu um erro no servidor', error: error.message});
+        res.status(500).json({ status: -1, message: 'Ocorreu um erro no servidor', error: error.message });
     }
 };

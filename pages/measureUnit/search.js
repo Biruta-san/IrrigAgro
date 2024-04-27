@@ -1,8 +1,8 @@
+import MeasureUnitSearchPage from "../../src/modules/MeasureUnit/screens/MeasureUnitSearchPage";
+
 const MeasureUnitSearch = () => {
     return (
-        <div>
-            <h1>MeasureUnit Search</h1>
-        </div>
+        <MeasureUnitSearchPage />
     );
 }
 

@@ -3,23 +3,21 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Button from '../../../../components/Button';
 import Link from '../../../../components/Link';
-import NumberInput from '../../../../components/NumberInput';
 import TextDescriptionValue from '../../../../components/TextDescriptionValue';
 import TextInput from '../../../../components/TextInput';
-import { GET_PLANTAS } from '../../../../constants/apiRoutes';
+import { GET_MEASURE_UNIT } from '../../../../constants/apiRoutes';
 import DataCard from '../../../../patterns/DataCard';
 import { isNotNullOrEmpty } from '../../../../utils/validate';
 import Panel from '../../../../components/Panel';
 
-const PlantSearchPage = () => {
+const MeasureUnitSearchPage = () => {
 
     const toast = useToast();
 
     const [campos, setCampos] = useState({
         nome: "",
-        descricao: "",
-        umidadeRecomendada: 0,
-        temperaturaRecomendada: 0
+        sigla: "",
+        descricao: ""
     });
 
     const [data, setData] = useState([]);
@@ -44,28 +42,27 @@ const PlantSearchPage = () => {
         try {
             setLoading(true);
             toast({
-                title: "Pesquisando plantas...",
+                title: "Pesquisando Unidades de Medida...",
                 status: "info",
                 duration: 5000,
                 isClosable: true,
                 position: "bottom-right",
                 variant: "left-accent"
             });
-            const response = await axios.get(GET_PLANTAS, {
+            const response = await axios.get(GET_MEASURE_UNIT, {
                 params: campos
             });
             const dataFormated = response.data.rows.map((item) => {
                 return {
-                    id: item.PLNT_ID,
-                    nome: item.PLNT_Nome,
-                    descricao: item.PLNT_Descricao,
-                    umidadeRecomendada: item.PLNT_UmidadeRecomendada,
-                    temperaturaRecomendada: item.PLNT_TemperaturaRecomendada
+                    id: item.UNME_ID,
+                    nome: item.UNME_Nome,
+                    sigla: item.UNME_Sigla,
+                    descricao: item.UNME_Descricao
                 }
             });
             if (response.data.status === 1)
                 toast({
-                    title: "Plantas pesquisadas com sucesso",
+                    title: "Unidades de Medida pesquisadas com sucesso",
                     status: "success",
                     duration: 5000,
                     isClosable: true,
@@ -74,7 +71,7 @@ const PlantSearchPage = () => {
                 })
             else if (response.data.status === -1)
                 toast({
-                    title: "Erro ao pesquisar plantas",
+                    title: "Erro ao pesquisar Unidades de Medida",
                     status: "error",
                     duration: 5000,
                     isClosable: true,
@@ -106,18 +103,15 @@ const PlantSearchPage = () => {
                             <TextInput value={campos.nome} onChange={(e) => handleChange(e.target.value, "nome")} label={"Nome"} />
                         </Box>
                         <Box style={{ flexGrow: 1, flexBasis: 200 }}>
+                            <TextInput value={campos.sigla} onChange={(e) => handleChange(e.target.value, "sigla")} label={"Sigla"} />
+                        </Box>
+                        <Box style={{ flexGrow: 1, flexBasis: 200 }}>
                             <TextInput value={campos.descricao} onChange={(e) => handleChange(e.target.value, "descricao")} label={"Descricao"} />
-                        </Box>
-                        <Box style={{ flexGrow: 1, flexBasis: 200 }}>
-                            <NumberInput value={campos.umidadeRecomendada} onChange={(e) => handleChange(e, "umidadeRecomendada")} label={"Umidade recomendada"} />
-                        </Box>
-                        <Box style={{ flexGrow: 1, flexBasis: 200 }}>
-                            <NumberInput value={campos.temperaturaRecomendada} onChange={(e) => handleChange(e, "temperaturaRecomendada")} label={"Temperatura recomendada"} />
                         </Box>
                     </Flex>
                     <Flex direction={'row'} gap={'10px'}>
                         <Button onClick={getData} type="search" isLoading={loading}>Pesquisar</Button>
-                        <Link href="/plant/add">
+                        <Link href="/measureUnit/add">
                             <Button onClick={getData} type="submit">Adicionar</Button>
                         </Link>
                     </Flex>
@@ -130,10 +124,9 @@ const PlantSearchPage = () => {
                             data.map((item, index) => {
                                 return (
                                     <Box key={index}>
-                                        <DataCard hrefEdit={`/plant/edit/${item.id}`} heading={item.nome}>
+                                        <DataCard hrefEdit={`/measureUnit/edit/${item.id}`} heading={item.nome}>
+                                            <TextDescriptionValue description={"Sigla"} value={item.sigla} />
                                             <TextDescriptionValue description={"Descricao"} value={item.descricao} />
-                                            <TextDescriptionValue description={"Temperatura Recomendada"} value={item.umidadeRecomendada} />
-                                            <TextDescriptionValue description={"Umidade Recomendada"} value={item.temperaturaRecomendada} />
                                         </DataCard>
                                     </Box>
                                 )
@@ -146,4 +139,4 @@ const PlantSearchPage = () => {
     );
 }
 
-export default PlantSearchPage;
+export default MeasureUnitSearchPage;

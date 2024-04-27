@@ -18,7 +18,7 @@ import TextInput from '../../../components/TextInput';
 import { useColorModeValue } from "../../../components/ColorModeProvider";
 import Panel from "../../../components/Panel";
 
-const Registro = () => {
+const Register = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -127,4 +127,4 @@ const Registro = () => {
     );
 }
 
-export default Registro;
+export default Register;

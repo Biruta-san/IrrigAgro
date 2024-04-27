@@ -1,10 +1,10 @@
 import React from "react";
-import Registro from "../src/modules/Registro/screens";
+import Register from "../src/modules/Register/screens";
 
-const Register = () => {
+const RegisterPage = () => {
     return (
-        <Registro />
+        <Register />
     );
 }
 
-export default Register;
+export default RegisterPage;

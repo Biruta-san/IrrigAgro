@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Icon, Fade } from "@chakra-ui/react";
+import { Button, Icon, Fade, Text } from "@chakra-ui/react";
 import Link from "../Link";
 import styles from './NaviItem.module.css';
 import { useColorModeValue } from "../ColorModeProvider";
@@ -16,17 +16,17 @@ import {
     MENU_ITEM_TEXT_LIGHT_COLOR
 } from "../../constants/styleConstants";
 
-const NaviItem = ({ href, children, icon, menuActive }) => {
+const NaviItem = ({ href, children, icon, menuActive, isLargerThan550 }) => {
     const [isDisplayed, setIsDisplayed] = useState(false)
     const { colorMode, theme } = useColorModeValue();
 
     useEffect(() => {
-        if (menuActive) {
+        if (menuActive && isLargerThan550) {
             setTimeout(() => { setIsDisplayed(true) }, 200);
         } else {
             setIsDisplayed(false);
         }
-    }, [menuActive]);
+    }, [menuActive, isLargerThan550]);
 
     return (
         <Link
@@ -54,7 +54,7 @@ const NaviItem = ({ href, children, icon, menuActive }) => {
                 className={styles.Button}
                 leftIcon={
                     <Icon
-                        boxSize={menuActive ? "5" : "7"}
+                        boxSize={menuActive && isLargerThan550 ? "5" : "7"}
                         style={{ transition: "width 0.5s , height 0.5s" }}
                         color={colorMode}
                         as={icon}
@@ -67,6 +67,14 @@ const NaviItem = ({ href, children, icon, menuActive }) => {
                         className={`${styles.ButtonText}`}
                     >{children}
                     </Fade>
+                }
+                
+                {
+                    !isDisplayed && !isLargerThan550 &&
+                    <Text
+                        className={`${styles.ButtonText}`}
+                    >{children}
+                    </Text>
                 }
             </Button>
         </Link >

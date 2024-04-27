@@ -6,7 +6,7 @@ export const MENU_BG_BORDER_DARK_COLOR = "#464646";
 export const MENU_BG_DARK_COLOR = "#202020";
 export const MENU_WIDE_WIDTH = "220px";
 export const MENU_WIDE_WIDTH_COLLAPSED = "60px";
-export const MENU_TRANSITION = "width 0.5s";
+export const MENU_TRANSITION = "width 0.5s, margin 0.5s";
 
 export const BG_LIGHT_COLOR = "#FCFCFC";
 export const BG_DARK_COLOR = "#191919";

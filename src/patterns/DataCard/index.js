@@ -10,7 +10,7 @@ const DataCard = (props) => {
   const { theme } = useColorModeValue();
 
   return (
-    <Card bg={theme == 'light' ? BG_LIGHT_COLOR : BG_DARK_COLOR}>
+    <Card style={{transition: 'background-color 0.2s'}} bg={theme == 'light' ? BG_LIGHT_COLOR : BG_DARK_COLOR}>
       <CardHeader>
         <Heading style={{ color: theme == 'light' ? MENU_TEXT_LIGHT_COLOR : MENU_TEXT_DARK_COLOR }}>{props.heading}</Heading>
       </CardHeader>

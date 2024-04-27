@@ -10,20 +10,17 @@ export default async function handler(req, res) {
             const result = await pool.request()
                 .input('nome', data.nome)
                 .input('descricao', data.descricao)
-                .input('umidadeRecomendada', data.umidadeRecomendada)
-                .input('temperaturaRecomendada', data.temperaturaRecomendada)
+                .input('sigla', data.sigla)
                 .query(
-                    `INSERT INTO Planta (
-                        PLNT_Nome, 
-                        PLNT_Descricao, 
-                        PLNT_UmidadeRecomendada, 
-                        PLNT_TemperaturaRecomendada
+                    `INSERT INTO UnidadeMedida (
+                        UNME_Nome, 
+                        UNME_Descricao, 
+                        UNME_Sigla
                     ) 
                     VALUES (
                         @nome, 
                         @descricao, 
-                        @umidadeRecomendada, 
-                        @temperaturaRecomendada
+                        @sigla
                     )`
                 );
 
@@ -31,7 +28,7 @@ export default async function handler(req, res) {
 
         } catch (error) {
             console.error('Error inserting data:', error);
-            res.status(500).json({ success: -1, message: 'Ocorreu um erro no servidor' , error: error.message });
+            res.status(500).json({ success: -1, message: 'Ocorreu um erro no servidor', error: error.message });
         }
     } else {
         res.setHeader('Allow', ['POST']);

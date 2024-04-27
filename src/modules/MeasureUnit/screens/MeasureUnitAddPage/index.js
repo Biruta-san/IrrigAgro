@@ -1,27 +1,24 @@
-import { Box, Flex, SimpleGrid, useToast } from "@chakra-ui/react";
-import axios from 'axios';
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { Box, Flex, useToast } from "@chakra-ui/react";
+import TextInput from '../../../../components/TextInput';
 import Button from '../../../../components/Button';
 import Link from '../../../../components/Link';
-import NumberInput from '../../../../components/NumberInput';
-import TextInput from '../../../../components/TextInput';
-import { BASE_ROUTE_PLANTA } from '../../../../constants/apiRoutes';
-import Panel from "../../../../components/Panel";
-import { isNullOrEmpty } from "../../../../utils/validate";
+import { POST_MEASURE_UNIT } from '../../../../constants/apiRoutes';
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import Panel from '../../../../components/Panel';
+import { isNullOrEmpty } from '../../../../utils/validate';
 
-const PlantEditPage = ({ id, nome, descricao, temperaturaRecomendada, umidadeRecomendada }) => {
+const MeasureUnitAddPage = () => {
 
     const router = useRouter();
 
     const toast = useToast();
 
     const [campos, setCampos] = useState({
-        id: id,
-        nome: nome,
-        descricao: descricao,
-        temperaturaRecomendada: temperaturaRecomendada,
-        umidadeRecomendada: umidadeRecomendada
+        nome: "",
+        sigla: "",
+        descricao: ""
     });
 
     const [loading, setLoading] = useState(false);
@@ -34,24 +31,24 @@ const PlantEditPage = ({ id, nome, descricao, temperaturaRecomendada, umidadeRec
     }
 
     const isInvalidForm = () =>{
-        return isNullOrEmpty(campos.nome) || isNullOrEmpty(campos.descricao);
+        return isNullOrEmpty(campos.nome) || isNullOrEmpty(campos.sigla);
     }
 
-    const putData = async () => {
+    const postData = async () => {
         try {
             setLoading(true);
             toast({
-                title: "Atualizando planta...",
+                title: "Adicionando Unidade de Medida...",
                 status: "info",
                 duration: 5000,
                 isClosable: true,
                 position: "bottom-right",
                 variant: "left-accent"
             });
-            const response = await axios.put(`${BASE_ROUTE_PLANTA}/${campos.id}`, campos);
+            const response = await axios.post(POST_MEASURE_UNIT, campos);
             if (response.data.status === 1)
                 toast({
-                    title: "Planta atualizada com sucesso",
+                    title: "Unidade de Medida Adicionada com sucesso",
                     status: "success",
                     duration: 5000,
                     isClosable: true,
@@ -60,7 +57,7 @@ const PlantEditPage = ({ id, nome, descricao, temperaturaRecomendada, umidadeRec
                 })
             else if (response.data.status === -1)
                 toast({
-                    title: "Erro ao atualizar planta",
+                    title: "Erro ao adicionar Unidade de Medida",
                     status: "error",
                     duration: 5000,
                     isClosable: true,
@@ -70,7 +67,7 @@ const PlantEditPage = ({ id, nome, descricao, temperaturaRecomendada, umidadeRec
         } catch (error) {
             console.error('Error inserting data:', error);
             toast({
-                title: "Erro ao atualizar planta",
+                title: "Erro ao atualizar Unidade de Medida",
                 status: "error",
                 duration: 5000,
                 isClosable: true,
@@ -79,7 +76,7 @@ const PlantEditPage = ({ id, nome, descricao, temperaturaRecomendada, umidadeRec
             });
         } finally {
             setLoading(false);
-            router.push('/plant/search');
+            router.push('/measureUnit/search');
         }
     }
 
@@ -89,24 +86,21 @@ const PlantEditPage = ({ id, nome, descricao, temperaturaRecomendada, umidadeRec
                 <Flex padding={"10px"} gap='10px' direction={"column"} >
                     <Flex direction={'row'} wrap={'wrap'} gap={"10px"}>
                         <Box style={{ flexGrow: 1, flexBasis: 200 }}>
-                            <TextInput value={campos.nome} onChange={(e) => handleChange(e.target.value, "nome")} label={"Nome"} />
+                            <TextInput isRequired={true} value={campos.nome} onChange={(e) => handleChange(e.target.value, "nome")} label={"Nome"} />
+                        </Box>
+                        <Box style={{ flexGrow: 1, flexBasis: 200 }}>
+                            <TextInput isRequired={true} value={campos.sigla} onChange={(e) => handleChange(e.target.value, "sigla")} label={"Sigla"} />
                         </Box>
                         <Box style={{ flexGrow: 1, flexBasis: 200 }}>
                             <TextInput value={campos.descricao} onChange={(e) => handleChange(e.target.value, "descricao")} label={"Descricao"} />
-                        </Box>
-                        <Box style={{ flexGrow: 1, flexBasis: 200 }}>
-                            <NumberInput value={campos.umidadeRecomendada} onChange={(e) => handleChange(e, "umidadeRecomendada")} label={"Umidade recomendada"} />
-                        </Box>
-                        <Box style={{ flexGrow: 1, flexBasis: 200 }}>
-                            <NumberInput value={campos.temperaturaRecomendada} onChange={(e) => handleChange(e, "temperaturaRecomendada")} label={"Temperatura recomendada"} />
                         </Box>
                     </Flex>
                 </Flex>
             </Panel>
             <Panel>
                 <Flex gap="20px" direction={"row"} p={"10px"} justify={"flex-start"} spacing={4}>
-                    <Button isDisabled={isInvalidForm()} onClick={putData} type="submit" isLoading={loading}>Atualizar</Button>
-                    <Link href="/plant/search">
+                    <Button isDisabled={isInvalidForm()} onClick={postData} type="submit" isLoading={loading}>Adicionar</Button>
+                    <Link href="/measureUnit/search">
                         <Button type="cancel" isLoading={loading}>Cancelar</Button>
                     </Link>
                 </Flex>
@@ -115,4 +109,4 @@ const PlantEditPage = ({ id, nome, descricao, temperaturaRecomendada, umidadeRec
     );
 }
 
-export default PlantEditPage;
+export default MeasureUnitAddPage;

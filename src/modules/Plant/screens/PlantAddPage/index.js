@@ -8,6 +8,7 @@ import { POST_PLANTA } from '../../../../constants/apiRoutes';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import Panel from '../../../../components/Panel';
+import { isNullOrEmpty } from '../../../../utils/validate';
 
 const PlantAddPage = () => {
 
@@ -29,6 +30,10 @@ const PlantAddPage = () => {
             ...campos,
             [name]: value
         });
+    }
+
+    const isInvalidForm = () =>{
+        return isNullOrEmpty(campos.nome) || isNullOrEmpty(campos.descricao);
     }
 
     const postData = async () => {
@@ -80,24 +85,26 @@ const PlantAddPage = () => {
     return (
         <Flex w={"100%"} direction={"column"} align={"center"} justify={"flex-start"}>
             <Panel>
-                <SimpleGrid p={"10px"} minChildWidth={"20%"} spacing={4}>
-                    <Box>
-                        <TextInput value={campos.nome} onChange={(e) => handleChange(e.target.value, "nome")} label={"Nome"} />
-                    </Box>
-                    <Box>
-                        <TextInput value={campos.descricao} onChange={(e) => handleChange(e.target.value, "descricao")} label={"Descricao"} />
-                    </Box>
-                    <Box>
-                        <NumberInput value={campos.umidadeRecomendada} onChange={(e) => handleChange(e, "umidadeRecomendada")} label={"Umidade recomendada"} />
-                    </Box>
-                    <Box>
-                        <NumberInput value={campos.temperaturaRecomendada} onChange={(e) => handleChange(e, "temperaturaRecomendada")} label={"Temperatura recomendada"} />
-                    </Box>
-                </SimpleGrid>
+                <Flex padding={"10px"} gap='10px' direction={"column"} >
+                    <Flex direction={'row'} wrap={'wrap'} gap={"10px"}>
+                        <Box style={{ flexGrow: 1, flexBasis: 200 }}>
+                            <TextInput isRequired={true} value={campos.nome} onChange={(e) => handleChange(e.target.value, "nome")} label={"Nome"} />
+                        </Box>
+                        <Box style={{ flexGrow: 1, flexBasis: 200 }}>
+                            <TextInput isRequired={true} value={campos.descricao} onChange={(e) => handleChange(e.target.value, "descricao")} label={"Descricao"} />
+                        </Box>
+                        <Box style={{ flexGrow: 1, flexBasis: 200 }}>
+                            <NumberInput value={campos.umidadeRecomendada} onChange={(e) => handleChange(e, "umidadeRecomendada")} label={"Umidade recomendada"} />
+                        </Box>
+                        <Box style={{ flexGrow: 1, flexBasis: 200 }}>
+                            <NumberInput value={campos.temperaturaRecomendada} onChange={(e) => handleChange(e, "temperaturaRecomendada")} label={"Temperatura recomendada"} />
+                        </Box>
+                    </Flex>
+                </Flex>
             </Panel>
             <Panel>
                 <Flex gap="20px" direction={"row"} p={"10px"} justify={"flex-start"} spacing={4}>
-                    <Button onClick={postData} type="submit" isLoading={loading}>Adicionar</Button>
+                    <Button isDisabled={isInvalidForm()} onClick={postData} type="submit" isLoading={loading}>Adicionar</Button>
                     <Link href="/plant/search">
                         <Button type="cancel" isLoading={loading}>Cancelar</Button>
                     </Link>

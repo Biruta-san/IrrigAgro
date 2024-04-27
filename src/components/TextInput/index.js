@@ -16,11 +16,11 @@ const TextInput = ({
 
     return (
         <Box flex="1">
-            <Flex direction="row" mb={"3px"}>
+            <Flex direction="row" mb={"3px"} gap="5px">
                 <Text color={theme == 'light' ? MENU_TEXT_LIGHT_COLOR : MENU_TEXT_DARK_COLOR}>
                     {label}
                 </Text>
-                <Text color={'crimson'}>
+                <Text color={'red.400'}>
                     {`${isRequired ? '*' : ''}`}
                 </Text>
             </Flex>
@@ -32,7 +32,7 @@ const TextInput = ({
                 placeholder={placeholder}
                 borderColor={theme == 'light' ? MENU_BG_BORDER_LIGHT_COLOR : MENU_BG_BORDER_DARK_COLOR}
                 focusBorderColor={colorMode}
-                errorBorderColor='crimson'
+                errorBorderColor='red.400'
                 color={theme == 'light' ? MENU_TEXT_LIGHT_COLOR : MENU_TEXT_DARK_COLOR}
                 isInvalid={isNullOrEmpty(value) && isRequired}
             />
