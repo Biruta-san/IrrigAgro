@@ -22,3 +22,8 @@ export const POST_PLANTA = `${BASE_ROUTE_PLANTA}/postPlant`;
 export const BASE_ROUTE_MEASURE_UNIT = `${API_BASE_ROUTE}/MeasureUnit`
 export const GET_MEASURE_UNIT = `${BASE_ROUTE_MEASURE_UNIT}/getAllMeasureUnits`;
 export const POST_MEASURE_UNIT = `${BASE_ROUTE_MEASURE_UNIT}/postMeasureUnit`;
+
+/* Rotas de API de Unidades de Medida */
+export const BASE_ROUTE_SOIL_TYPE = `${API_BASE_ROUTE}/SoilType`
+export const GET_SOIL_TYPE = `${BASE_ROUTE_SOIL_TYPE}/getAllSoilTypes`;
+export const POST_SOIL_TYPE = `${BASE_ROUTE_SOIL_TYPE}/postSoilType`;

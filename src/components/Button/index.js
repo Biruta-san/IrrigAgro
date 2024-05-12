@@ -3,10 +3,15 @@ import { Button as ChakraButton } from "@chakra-ui/react";
 import React from "react";
 import { useColorModeValue } from "../ColorModeProvider";
 import { MENU_TEXT_DARK_COLOR, MENU_TEXT_LIGHT_COLOR } from "../../constants/styleConstants";
+import tinycolor from "tinycolor2";
 
 const Button = (props) => {
 
+    const { children, type, w = "120px" } = props;
+
     const { colorMode, theme } = useColorModeValue();
+    const darkenColor = tinycolor(colorMode).darken().toString();
+    const lightenColor = tinycolor(colorMode).lighten().toString();
 
     if (props.type == "cancel") {
         return (
@@ -17,8 +22,7 @@ const Button = (props) => {
                 borderColor={"red.400"}
                 _hover={{ backgroundColor: "red.400" }}
                 _active={{ backgroundColor: "red.600" }}
-                minWidth={"50px"}
-                maxWidth={"150px"}
+                w={w}
                 {...props}
             >
                 {props.children}
@@ -34,8 +38,7 @@ const Button = (props) => {
                 _hover={{ backgroundColor: "green.400" }}
                 _active={{ backgroundColor: "green.600" }}
                 leftIcon={<SmallAddIcon color="green.500" />}
-                minWidth={"50px"}
-                maxWidth={"150px"}
+                w={w}
                 {...props}
             >
                 {props.children}
@@ -52,8 +55,7 @@ const Button = (props) => {
                 _hover={{ backgroundColor: "blue.400" }}
                 _active={{ backgroundColor: "blue.600" }}
                 leftIcon={<SearchIcon color="blue.500" />}
-                minWidth={"50px"}
-                maxWidth={"150px"}
+                w={w}
                 {...props}
             >
                 {props.children}
@@ -65,7 +67,10 @@ const Button = (props) => {
         return (
             <ChakraButton
                 color={theme == 'light' ? MENU_TEXT_LIGHT_COLOR : MENU_TEXT_DARK_COLOR}
+                _hover={{ backgroundColor: lightenColor }}
+                _active={{ backgroundColor: darkenColor }}
                 backgroundColor={colorMode}
+                w={w}
                 {...props}
             >
                 {props.children}
