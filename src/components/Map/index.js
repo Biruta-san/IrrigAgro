@@ -1,6 +1,4 @@
-'use client'
 import React, { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import { Box, useMediaQuery } from '@chakra-ui/react';
 
@@ -19,7 +17,6 @@ const Map = ({ setLatitude, setLongitude, latitude, longitude }) => {
             setMarker(newMarker);
         }
     }, []);
-
 
     const handleMapClick = (e) => {
         const newMarker = {
@@ -58,5 +55,4 @@ const Map = ({ setLatitude, setLongitude, latitude, longitude }) => {
     );
 };
 
-// Export as a dynamic component to handle client-side rendering
-export default dynamic(() => Promise.resolve(Map), { ssr: false });
+export default Map;

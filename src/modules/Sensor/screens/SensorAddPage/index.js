@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Box, useDisclosure } from "@chakra-ui/react";
 import TextInput from '../../../../components/TextInput';
 import CoordinateInput from "../../../../components/CoordinateInput";
-import Map from "../../../../components/Map";
 import Modal from "../../../../components/Modal";
+import dynamic from "next/dynamic";
 
 const SensorAddPage = () => {
 
@@ -20,6 +20,13 @@ const SensorAddPage = () => {
         setCampos({ ...campos, [index]: value });
     }
 
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
+    const DynamicMapComponent = useMemo(() => isOpen ? dynamic(
+        () => import('../../../../components/Map'),
+        { ssr: false }
+    ) : null, [isOpen]);
+
     const fixLatitude = (value) => {
         setLatitude(value.toFixed(6));
     }
@@ -28,20 +35,20 @@ const SensorAddPage = () => {
         setLongitude(value.toFixed(6));
     }
 
-    const { isOpen, onOpen, onClose } = useDisclosure();
-
     return (
         <>
             <Modal
                 isOpen={isOpen}
                 onClose={onClose}
                 header={"Mapear Campos"}
-                body={<Map
-                    latitude={latitude}
-                    setLatitude={fixLatitude}
-                    longitude={longitude}
-                    setLongitude={fixLongitude}
-                />}
+                body={DynamicMapComponent && (
+                    <DynamicMapComponent
+                        latitude={latitude}
+                        setLatitude={fixLatitude}
+                        longitude={longitude}
+                        setLongitude={fixLongitude}
+                    />
+                )}
             />
             <Box>
                 <TextInput label={"Descrição do Sensor"} isRequired placeholder="Informe o Nome" value={campos.nome} onChange={(e) => handleOnChange(e.target.value, 'nome')} />

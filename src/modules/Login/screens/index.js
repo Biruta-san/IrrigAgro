@@ -50,9 +50,8 @@ const Login = () => {
         e.preventDefault();
         try {
             const user = await logUser(email, password);
-            console.log(user)
             if (user.uid !== undefined && user.uid !== null && user.uid !== '') {
-                router.push('/user');
+                router.push('/home');
             } else if (user == 'auth/invalid-email') {
                 setAlertType(ALERT_TYPES.EMAIL_INVALIDO);
                 onOpen();
