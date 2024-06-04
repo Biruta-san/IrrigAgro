@@ -9,8 +9,8 @@ export default async function handler(req, res) {
 
             const result = await pool.request()
                 .input('idTipoSensor', data.idTipoSensor)
-                .input('latitude', data.latitude)
-                .input('longitude', data.longitude)
+                .input('latitude', parseFloat(data.latitude))
+                .input('longitude', parseFloat(data.longitude))
                 .input('idPlanta', data.idPlanta)
                 .input('descricao', data.descricao)
                 .query(

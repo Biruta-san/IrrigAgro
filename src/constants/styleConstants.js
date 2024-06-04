@@ -25,6 +25,8 @@ export const MENU_ITEM_ICON_COLOR = "#DD2E44"
 
 export const MENU_TEXT_LIGHT_COLOR = "#000";
 export const MENU_TEXT_DARK_COLOR = "#FFF";
+export const PLACEHOLDER_TEXT_LIGHT_COLOR = "#aaabac";    
+export const PLACEHOLDER_TEXT_DARK_COLOR = "#6c6c6c";
 
 export const PASSWORD_ADDON_COLOR = MENU_ITEM_ICON_COLOR;
 export const PASSWORD_ADDON_COLOR_HOVER = '#aa2334';

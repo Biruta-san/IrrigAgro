@@ -5,10 +5,10 @@ import { MENU_TEXT_DARK_COLOR, MENU_TEXT_LIGHT_COLOR } from '../../constants/sty
 import Button from '../Button';
 import { useColorModeValue } from '../ColorModeProvider';
 
-const PasswordInput = ({value, onChange, id, onKeyDown }) => {
+const PasswordInput = ({ value, onChange, id, onKeyDown }) => {
     const [show, setShow] = useState(false);
     const handleClick = () => setShow(!show);
-    const {colorMode, theme} = useColorModeValue();
+    const { colorMode, theme } = useColorModeValue();
 
 
     const ShowIcon = () => {
@@ -20,9 +20,13 @@ const PasswordInput = ({value, onChange, id, onKeyDown }) => {
             <InputGroup >
                 <Input
                     id={id}
+                    minHeight='40px'
+                    maxHeight='70px'
+                    borderRadius={'5px'}
                     type={show ? 'text' : 'password'}
                     placeholder='Digite sua senha'
                     focusBorderColor={colorMode}
+                    borderWidth={'1.5px'}
                     value={value}
                     color={theme == 'light' ? MENU_TEXT_LIGHT_COLOR : MENU_TEXT_DARK_COLOR}
                     onChange={(e) => onChange(e)}

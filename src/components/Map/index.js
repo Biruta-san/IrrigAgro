@@ -23,8 +23,8 @@ const Map = ({ setLatitude, setLongitude, latitude, longitude }) => {
             position: [e.latlng.lat, e.latlng.lng],
             text: 'Marker'
         };
-        setLongitude(e.latlng.lng);
         setLatitude(e.latlng.lat);
+        setLongitude(e.latlng.lng);
         setMarker(newMarker);
     };
 

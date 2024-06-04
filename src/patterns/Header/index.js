@@ -1,5 +1,5 @@
 import React from 'react';
-import { MENU_BG_LIGHT_COLOR, MENU_BG_DARK_COLOR, MENU_BG_BORDER_LIGHT_COLOR, MENU_BG_BORDER_DARK_COLOR, MENU_TEXT_LIGHT_COLOR, MENU_TEXT_DARK_COLOR } from '../../constants/styleConstants';
+import { MENU_BG_LIGHT_COLOR, MENU_BG_DARK_COLOR, MENU_BG_BORDER_LIGHT_COLOR, MENU_BG_BORDER_DARK_COLOR } from '../../constants/styleConstants';
 import { Box, Flex, Icon, IconButton } from '@chakra-ui/react';
 import { MdOutlineLogout } from "react-icons/md";
 import { useColorModeValue } from "../../components/ColorModeProvider";

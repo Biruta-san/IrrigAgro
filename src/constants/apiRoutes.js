@@ -1,4 +1,3 @@
-/* FAZENDA */
 /* base route para desenvolvimento */
 //const API_BASE_ROUTE = 'http://localhost:3000/api';
 /* base route para produção */
@@ -16,14 +15,22 @@ export const POST_SENSOR = `${API_BASE_ROUTE}/Sensor/postSensor`;
 export const BASE_ROUTE_PLANTA = `${API_BASE_ROUTE}/Plant`
 export const GET_PLANTAS = `${BASE_ROUTE_PLANTA}/getAllPlants`;
 export const POST_PLANTA = `${BASE_ROUTE_PLANTA}/postPlant`;
-
+export const LIST_PLANTA = `${BASE_ROUTE_PLANTA}/list`;
 
 /* Rotas de API de Unidades de Medida */
 export const BASE_ROUTE_MEASURE_UNIT = `${API_BASE_ROUTE}/MeasureUnit`
 export const GET_MEASURE_UNIT = `${BASE_ROUTE_MEASURE_UNIT}/getAllMeasureUnits`;
 export const POST_MEASURE_UNIT = `${BASE_ROUTE_MEASURE_UNIT}/postMeasureUnit`;
+export const LIST_MEASURE_UNIT = `${BASE_ROUTE_MEASURE_UNIT}/list`;
 
 /* Rotas de API de Unidades de Medida */
 export const BASE_ROUTE_SOIL_TYPE = `${API_BASE_ROUTE}/SoilType`
 export const GET_SOIL_TYPE = `${BASE_ROUTE_SOIL_TYPE}/getAllSoilTypes`;
 export const POST_SOIL_TYPE = `${BASE_ROUTE_SOIL_TYPE}/postSoilType`;
+export const LIST_SOIL_TYPE = `${BASE_ROUTE_SOIL_TYPE}/list`;
+
+/* Rotas de API de Tipos de sensores */
+export const BASE_ROUTE_SENSOR_TYPE = `${API_BASE_ROUTE}/SensorType`
+export const GET_SENSOR_TYPE = `${BASE_ROUTE_SENSOR_TYPE}/getAllSensorTypes`;
+export const POST_SENSOR_TYPE = `${BASE_ROUTE_SENSOR_TYPE}/postSensorType`;
+export const LIST_SENSOR_TYPE = `${BASE_ROUTE_SENSOR_TYPE}/list`;

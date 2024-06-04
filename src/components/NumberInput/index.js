@@ -37,6 +37,10 @@ const NumberInput = ({
                 min={0}
                 variant={'outline'}
                 isRequired={isRequired}
+                minHeight='40px'
+                maxHeight='70px'
+                borderRadius={'5px'}
+                borderWidth={'1.5px'}
                 placeholder={placeholder}
                 focusBorderColor={colorMode}
                 borderColor={theme == 'light' ? MENU_BG_BORDER_LIGHT_COLOR : MENU_BG_BORDER_DARK_COLOR}
