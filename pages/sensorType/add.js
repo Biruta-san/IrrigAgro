@@ -1,9 +1,9 @@
+import TipoSensorAddPage from '../../src/modules/TypeSensor/screens/TipoSensorAddPage';
+
 const SensorTypeAdd = () => {
     return (
-        <div>
-            <h1>Add Sensor Type</h1>
-        </div>
+        <TipoSensorAddPage />
     );
-}
+};
 
 export default SensorTypeAdd;

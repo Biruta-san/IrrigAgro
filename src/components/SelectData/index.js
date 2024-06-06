@@ -37,7 +37,8 @@ const SelectData = (props) => {
                 backgroundColor: isSelected ? colorMode :
                                  isFocused ? lightenColor : theme == 'light' ? BG_LIGHT_COLOR : BG_DARK_COLOR,
                 color: isSelected ? isDark ? MENU_TEXT_DARK_COLOR : MENU_TEXT_LIGHT_COLOR :
-                       isFocused ? isLightenColorDark ? MENU_TEXT_DARK_COLOR : MENU_TEXT_LIGHT_COLOR : colorMode,
+                       isFocused ? isLightenColorDark ? MENU_TEXT_DARK_COLOR : MENU_TEXT_LIGHT_COLOR : 
+                       theme == 'light' ? darkenColor : lightenColor,
                 fontWeight: 'normal'
             }
         },
@@ -75,6 +76,7 @@ const SelectData = (props) => {
                         )}
                     styles={selectStyles}
                     isClearable={true}
+                    value={options.filter(option => option.value === value) ?? null}
                     onChange={onChange}
                     options={options}
                     isInvalid={isNullOrEmpty(value) && isRequired}

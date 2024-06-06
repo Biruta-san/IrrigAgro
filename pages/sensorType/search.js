@@ -1,9 +1,9 @@
-const SensorTypeSearch = () => {
+import SensorTypeSearch from "../../src/modules/TypeSensor/screens/TipoSensorSearchPage";
+
+const SensorType = () => {
   return (
-    <div>
-      <h1>SensorType Search</h1>
-    </div>
+      <SensorTypeSearch />
   );
 };
 
-export default SensorTypeSearch;
+export default SensorType;

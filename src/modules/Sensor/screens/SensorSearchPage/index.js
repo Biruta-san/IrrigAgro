@@ -5,7 +5,7 @@ import Button from '../../../../components/Button';
 import Link from '../../../../components/Link';
 import TextDescriptionValue from '../../../../components/TextDescriptionValue';
 import TextInput from '../../../../components/TextInput';
-import { GET_SENSORES, LIST_MEASURE_UNIT, LIST_PLANTA, LIST_SENSOR_TYPE, LIST_SOIL_TYPE } from '../../../../constants/apiRoutes';
+import { GET_SENSORES, LIST_PLANTA, LIST_SENSOR_TYPE, LIST_SOIL_TYPE } from '../../../../constants/apiRoutes';
 import DataCard from '../../../../patterns/DataCard';
 import { isNotNullOrEmpty, isNullOrEmpty } from '../../../../utils/validate';
 import Panel from '../../../../components/Panel';
@@ -16,7 +16,6 @@ const SensorSearchPage = () => {
     const toast = useToast();
 
     const [campos, setCampos] = useState({
-        nome: "",
         descricao: "",
         tipoSensorId: null,
         tipoSoloId: null,
@@ -24,8 +23,6 @@ const SensorSearchPage = () => {
     });
 
     const [data, setData] = useState([]);
-    const [unidadeMedidas, setUnidadeMedidas] = useState([]);
-    const [loadingUnidadeMedidas, setLoadingUnidadeMedidas] = useState(false);
     const [plantas, setPlantas] = useState([]);
     const [loadingPlantas, setLoadingPlantas] = useState(false);
     const [tipoSolos, setTipoSolos] = useState([]);
@@ -36,15 +33,15 @@ const SensorSearchPage = () => {
     const [loading, setLoading] = useState(false);
 
     const handleChange = (value, name) => {
-        setCampos({
-            ...campos,
+        setCampos((prevCampos) => ({
+            ...prevCampos,
             [name]: isNullOrEmpty(value) ? null : value
-        });
+        }));
     }
 
     useEffect(() => {
         const fetchData = async () => {
-            await getData();
+            getData();
             getPlantas();
             getTipoSolos();
             getTipoSensores();
@@ -66,18 +63,8 @@ const SensorSearchPage = () => {
             const response = await axios.get(GET_SENSORES, {
                 params: campos
             });
-            const dataFormated = response.data.rows.map((item) => {
-                return {
-                    id: item.SESO_ID,
-                    nome: item.SESO_Nome,
-                    descricao: item.SESO_Descricao,
-                    unidadeMedidaId: item.UNME_ID,
-                    unidadeMedidaNome: item.UNME_Nome,
-                    tipoSoloId: item.TPSO_ID,
-                    tipoSoloNome: item.TPSO_Nome
-                }
-            });
-            if (response.data.status === 1) {
+
+            if (response?.data?.status === 1) {
                 toast({
                     title: "Sensores pesquisadas com sucesso",
                     status: "success",
@@ -86,8 +73,22 @@ const SensorSearchPage = () => {
                     position: "bottom-right",
                     variant: "left-accent"
                 })
+                const dataFormated = response?.data?.rows?.map((item) => {
+                    return {
+                        id: item.SESO_ID,
+                        nome: item.SESO_Nome,
+                        descricao: item.SESO_Descricao,
+                        unidadeMedidaId: item.UNME_ID,
+                        unidadeMedidaNome: item.UNME_Nome,
+                        tipoSoloId: item.TPSO_ID,
+                        tipoSoloNome: item.TPSO_Nome,
+                        tipoSensorId: item.TPSE_ID,
+                        tipoSensorNome: item.TPSE_Nome
+                    }
+                });
+                setData(dataFormated);
             }
-            else if (response.data.status === -1) {
+            else if (response?.data?.status === -1) {
                 toast({
                     title: "Erro ao pesquisar sensores",
                     status: "error",
@@ -97,7 +98,6 @@ const SensorSearchPage = () => {
                     variant: "left-accent"
                 });
             }
-            setData(dataFormated);
         } catch (error) {
             console.error('Error inserting data:', error);
             toast({
@@ -155,24 +155,17 @@ const SensorSearchPage = () => {
                 <Flex padding={"10px"} gap='10px' direction={"column"} >
                     <Flex direction={'row'} wrap={'wrap'} gap={"10px"}>
                         <Box style={{ flexGrow: 1, flexBasis: 200 }}>
-                            <TextInput 
-                                value={campos.nome} 
-                                onChange={(e) => handleChange(e.target.value, "nome")} 
-                                label={"Nome"} 
-                            />
-                        </Box>
-                        <Box style={{ flexGrow: 1, flexBasis: 200 }}>
-                            <TextInput 
-                                value={campos.descricao} 
-                                onChange={(e) => handleChange(e.target.value, "descricao")} 
-                                label={"Descricao"} 
-                                placeholder={'Informe a descrição'} 
+                            <TextInput
+                                value={campos.descricao}
+                                onChange={(e) => handleChange(e.target.value, "descricao")}
+                                label={"Descricao"}
+                                placeholder={'Informe a descrição'}
                             />
                         </Box>
                         <Box style={{ flexGrow: 1, flexBasis: 200 }}>
                             <SelectData
                                 options={tipoSensores}
-                                value={campos.unidadeMedidaId}
+                                value={campos.tipoSensorId}
                                 label={'Tipo de Sensor'}
                                 placeholder={'Selecione o tipo de sensor'}
                                 loading={loadingTipoSensores}
@@ -215,10 +208,10 @@ const SensorSearchPage = () => {
                             data.map((item, index) => {
                                 return (
                                     <Box key={index}>
-                                        <DataCard hrefEdit={`/plant/edit/${item.id}`} heading={item.nome}>
-                                            <TextDescriptionValue description={"Descricao"} value={item.descricao} />
-                                            <TextDescriptionValue description={"Temperatura Recomendada"} value={item.umidadeRecomendada} />
-                                            <TextDescriptionValue description={"Umidade Recomendada"} value={item.temperaturaRecomendada} />
+                                        <DataCard hrefEdit={`/plant/edit/${item.id}`} heading={item.descricao}>
+                                            <TextDescriptionValue description={"Tipo de Sensor"} value={item.tipoSensorNome} />
+                                            <TextDescriptionValue description={"Unidade de Medida"} value={item.unidadeMedidaNome} />
+                                            <TextDescriptionValue description={"Tipo de Solo"} value={item.tipoSoloNome} />
                                         </DataCard>
                                     </Box>
                                 )

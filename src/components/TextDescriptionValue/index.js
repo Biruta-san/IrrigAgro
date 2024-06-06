@@ -8,9 +8,9 @@ const TextDescriptionValue = (props) => {
   const { theme } = useColorModeValue();
 
   return isNotNullOrEmpty(props.value) && (
-    <Flex direction={"row"} gap="3px">
+    <Flex direction={"row"} gap="5px">
       <Text color={theme == 'light' ? MENU_TEXT_LIGHT_COLOR : MENU_TEXT_DARK_COLOR}>{props.description}:</Text>
-      <Text color={theme == 'light' ? MENU_TEXT_LIGHT_COLOR : MENU_TEXT_DARK_COLOR}>{props.value}</Text>
+      <Text fontWeight={'normal'} color={theme == 'light' ? MENU_TEXT_LIGHT_COLOR : MENU_TEXT_DARK_COLOR}>{props.value}</Text>
     </Flex>
   );
 };
