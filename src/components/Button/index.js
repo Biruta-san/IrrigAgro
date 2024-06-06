@@ -12,6 +12,7 @@ const Button = (props) => {
     const { colorMode, theme } = useColorModeValue();
     const darkenColor = tinycolor(colorMode).darken().toString();
     const lightenColor = tinycolor(colorMode).lighten().toString();
+    const isDark = tinycolor(colorMode).isDark();
 
     if (props.type == "cancel") {
         return (
@@ -66,7 +67,7 @@ const Button = (props) => {
     else {
         return (
             <ChakraButton
-                color={theme == 'light' ? MENU_TEXT_LIGHT_COLOR : MENU_TEXT_DARK_COLOR}
+                color={isDark ? MENU_TEXT_DARK_COLOR : MENU_TEXT_LIGHT_COLOR}
                 _hover={{ backgroundColor: lightenColor }}
                 _active={{ backgroundColor: darkenColor }}
                 backgroundColor={colorMode}
