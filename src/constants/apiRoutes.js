@@ -8,8 +8,9 @@ export const GET_FAZENDAS = `${API_BASE_ROUTE}/Farm/getFazendas`;
 export const POST_FAZENDAS = `${API_BASE_ROUTE}/Farm/postFazenda`;
 
 /* Rotas de API de Sensores */
-export const GET_SENSORES = `${API_BASE_ROUTE}/Sensor/getAllSensores`;
-export const POST_SENSOR = `${API_BASE_ROUTE}/Sensor/postSensor`;
+export const BASE_ROUTE_SENSOR = `${API_BASE_ROUTE}/Sensor`
+export const GET_SENSORES = `${BASE_ROUTE_SENSOR}/getAllSensores`;
+export const POST_SENSOR = `${BASE_ROUTE_SENSOR}/postSensor`;
 
 /* Rotas de API de Plantas */
 export const BASE_ROUTE_PLANTA = `${API_BASE_ROUTE}/Plant`

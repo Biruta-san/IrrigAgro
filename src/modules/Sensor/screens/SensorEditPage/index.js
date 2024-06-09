@@ -3,7 +3,7 @@ import { Box, Flex, useToast, useDisclosure } from "@chakra-ui/react";
 import TextInput from '../../../../components/TextInput';
 import Button from '../../../../components/Button';
 import Link from '../../../../components/Link';
-import { LIST_PLANTA, LIST_SENSOR_TYPE, LIST_SOIL_TYPE, POST_SENSOR } from '../../../../constants/apiRoutes';
+import { BASE_ROUTE_SENSOR, LIST_PLANTA, LIST_SENSOR_TYPE, LIST_SOIL_TYPE} from '../../../../constants/apiRoutes';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import Panel from '../../../../components/Panel';
@@ -14,20 +14,21 @@ import dynamic from "next/dynamic";
 import SelectData from '../../../../components/SelectData';
 import DateTimeInput from '../../../../components/DateTimeInput';
 
-const SensorAddPage = () => {
+const SensorEditPage = ({id, descricao, tipoSensorId, tipoSoloId, plantaId, latitude, longitude, dataInstalacao}) => {
 
     const router = useRouter();
 
     const toast = useToast();
 
     const [campos, setCampos] = useState({
-        descricao: "",
-        tipoSensorId: null,
-        tipoSoloId: null,
-        plantaId: null,
-        latitude: 0,
-        longitude: 0,
-        dataInstalacao: null
+        id: id,
+        descricao: descricao,
+        tipoSensorId: tipoSensorId,
+        tipoSoloId: tipoSoloId,
+        plantaId: plantaId,
+        latitude: latitude ?? 0,
+        longitude: longitude ?? 0,
+        dataInstalacao: dataInstalacao
     });
 
     const [loading, setLoading] = useState(false);
@@ -101,7 +102,7 @@ const SensorAddPage = () => {
         }
     };
 
-    const postData = async () => {
+    const putData = async () => {
         try {
             setLoading(true);
             toast({
@@ -112,7 +113,7 @@ const SensorAddPage = () => {
                 position: "bottom-right",
                 variant: "left-accent"
             });
-            const response = await axios.post(POST_SENSOR, campos);
+            const response = await axios.put(`${BASE_ROUTE_SENSOR}/${campos.id}`, campos);
             if (response.data.status === 1)
                 toast({
                     title: "Sensor Adicionado com sucesso",
@@ -222,7 +223,7 @@ const SensorAddPage = () => {
                 </Panel>
                 <Panel>
                     <Flex gap="20px" direction={"row"} p={"10px"} justify={"flex-start"} spacing={4}>
-                        <Button isDisabled={isInvalidForm()} onClick={postData} type="submit" isLoading={loading}>Adicionar</Button>
+                        <Button isDisabled={isInvalidForm()} onClick={putData} type="save" isLoading={loading}>Atualizar</Button>
                         <Link href="/sensor/search">
                             <Button type="cancel" isLoading={loading}>Cancelar</Button>
                         </Link>
@@ -233,4 +234,4 @@ const SensorAddPage = () => {
     );
 }
 
-export default SensorAddPage;
+export default SensorEditPage;

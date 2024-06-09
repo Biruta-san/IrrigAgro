@@ -167,7 +167,7 @@ const SensorSearchPage = () => {
                                 options={tipoSensores}
                                 value={campos.tipoSensorId}
                                 label={'Tipo de Sensor'}
-                                placeholder={'Selecione o tipo de sensor'}
+                                placeholder={'Selecione o tipo'}
                                 loading={loadingTipoSensores}
                                 onChange={(e) => handleChange(e?.value, "tipoSensorId")}
                             />
@@ -208,7 +208,7 @@ const SensorSearchPage = () => {
                             data.map((item, index) => {
                                 return (
                                     <Box key={index}>
-                                        <DataCard hrefEdit={`/plant/edit/${item.id}`} heading={item.descricao}>
+                                        <DataCard hrefEdit={`/sensor/edit/${item.id}`} heading={item.descricao}>
                                             <TextDescriptionValue description={"Tipo de Sensor"} value={item.tipoSensorNome} />
                                             <TextDescriptionValue description={"Unidade de Medida"} value={item.unidadeMedidaNome} />
                                             <TextDescriptionValue description={"Tipo de Solo"} value={item.tipoSoloNome} />

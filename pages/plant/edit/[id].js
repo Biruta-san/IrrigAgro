@@ -24,34 +24,6 @@ export async function getServerSideProps(context) {
     }
     await getDataById();
 
-    /* Dados Mocados */
-    /*const mock = [
-      {
-        id: 1,
-        nome: 'nome1',
-        descricao: 'desc1',
-        umidadeRecomendada: 9,
-        temperaturaRecomendada: 0
-      },
-      {
-        id: 2,
-        nome: 'nome2',
-        descricao: 'desc2',
-        umidadeRecomendada: 0,
-        temperaturaRecomendada: 3
-      },
-      {
-        id: 3,
-        nome: 'nome3',
-        descricao: 'desc3',
-        umidadeRecomendada: 10,
-        temperaturaRecomendada: 3
-      },
-    ];
-    data = mock.filter((dado) => dado.id === id);
-    console.log(data[0]);
-    */
-
     const dados = data.rows[0];
 
     return {

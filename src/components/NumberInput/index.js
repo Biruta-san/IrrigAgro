@@ -16,10 +16,8 @@ const NumberInput = ({
     const { colorMode, theme } = useColorModeValue();
 
     const handleChange = (newValueString) => {
-        // Convert the new value from string to number
         const newValue = parseFloat(newValueString);
 
-        // Call the onChange function with the new value
         onChange(newValue);
     };
 
@@ -39,18 +37,16 @@ const NumberInput = ({
                 isRequired={isRequired}
                 minHeight='40px'
                 maxHeight='70px'
-                borderRadius={'5px'}
-                borderWidth={'1.5px'}
                 placeholder={placeholder}
-                focusBorderColor={colorMode}
                 borderColor={theme == 'light' ? MENU_BG_BORDER_LIGHT_COLOR : MENU_BG_BORDER_DARK_COLOR}
+                focusBorderColor={colorMode}
                 errorBorderColor='crimson'
                 color={theme == 'light' ? MENU_TEXT_LIGHT_COLOR : MENU_TEXT_DARK_COLOR}
                 isInvalid={isNullOrEmpty(value) && isRequired}
                 value={value}
                 onChange={handleChange}
             >
-                <NumberInputField />
+                <NumberInputField borderWidth={'1.5px'} borderRadius={'5px'}/>
                 <NumberInputStepper>
                     <NumberIncrementStepper
                         color={theme == 'light' ? MENU_TEXT_LIGHT_COLOR : MENU_TEXT_DARK_COLOR} />

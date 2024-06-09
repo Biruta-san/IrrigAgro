@@ -1,3 +1,4 @@
+import { isNotNullOrEmpty } from '../../../src/utils/validate';
 const { connectToDatabase } = require('../../../connectToDatabase');
 
 export default async function handler(req, res) {
@@ -31,21 +32,41 @@ export default async function handler(req, res) {
 
             const intId = parseInt(id);
 
+            const treatData = () => {
+                if (isNotNullOrEmpty(data.latitude))
+                    data.latitude = parseFloat(data.latitude);
+                else
+                    data.latitude = null;
+                if (isNotNullOrEmpty(data.longitude))
+                    data.longitude = parseFloat(data.longitude);
+                else
+                    data.longitude = null;
+                if (isNotNullOrEmpty(data.dataInstalacao))
+                    data.dataInstalacao = String(data.dataInstalacao).replace('T', ' ');
+
+                console.log(data.dataInstalacao);
+            }
+            treatData();
+
             // Execução da consulta SQL
             const result = await pool.request()
-                .input('nome', data.nome)
-                .input('descricao', data.descricao)
-                .input('unidadeMedidaId', data.unidadeMedidaId)
-                .input('plantaId', data.plantaId)
-                .input('tipoSoloId', data.tipoSoloId)
                 .input('id', intId)
+                .input('descricao', data.descricao)
+                .input('idTipoSensor', data.tipoSensorId)
+                .input('latitude', data.latitude)
+                .input('longitude', data.longitude)
+                .input('idPlanta', data.plantaId)
+                .input('idTipoSolo', data.tipoSoloId)
+                .input('dataInstalacao', data.dataInstalacao)
                 .query(
                     `UPDATE Sensor
-                        SET SESO_Nome = @nome
-                        , SESO_Descricao = @descricao
-                        , UNME_ID = @unidadeMedidaId
-                        , PLNT_ID = @plantaId
-                        , TPSO_ID = @tipoSoloId
+                        SET SESO_Descricao = @descricao
+                        , TPSE_ID = @idTipoSensor
+                        , SESO_Latitude = @latitude
+                        , SESO_Longitude = @longitude
+                        , PLNT_ID = @idPlanta
+                        , TPSO_ID = @idTipoSolo
+                        , SESO_DataInstalacao = CAST(@dataInstalacao AS DATETIME)
                         WHERE SESO_ID = @id`);
 
             res.status(200).json({ status: 1, rowCount: result.rowsAffected, message: 'Sensor atualizado com sucesso' });

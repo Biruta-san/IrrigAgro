@@ -1,9 +1,10 @@
 import { SearchIcon, SmallAddIcon, SmallCloseIcon } from "@chakra-ui/icons";
-import { Button as ChakraButton } from "@chakra-ui/react";
+import { Button as ChakraButton, Icon } from "@chakra-ui/react";
 import React from "react";
 import { useColorModeValue } from "../ColorModeProvider";
 import { MENU_TEXT_DARK_COLOR, MENU_TEXT_LIGHT_COLOR } from "../../constants/styleConstants";
 import tinycolor from "tinycolor2";
+import { IoMdSave } from "react-icons/io";
 
 const Button = (props) => {
 
@@ -56,6 +57,23 @@ const Button = (props) => {
                 _hover={{ backgroundColor: "blue.400" }}
                 _active={{ backgroundColor: "blue.600" }}
                 leftIcon={<SearchIcon color="blue.500" />}
+                w={w}
+                {...props}
+            >
+                {props.children}
+            </ChakraButton>
+        );
+    }
+    
+    else if (props.type == "save") {
+        return (
+            <ChakraButton
+                variant={"outline"}
+                color={theme == 'light' ? MENU_TEXT_LIGHT_COLOR : MENU_TEXT_DARK_COLOR}
+                borderColor={colorMode}
+                _hover={{ backgroundColor: lightenColor }}
+                _active={{ backgroundColor: darkenColor }}
+                leftIcon={<Icon as={IoMdSave} color={colorMode} />}
                 w={w}
                 {...props}
             >

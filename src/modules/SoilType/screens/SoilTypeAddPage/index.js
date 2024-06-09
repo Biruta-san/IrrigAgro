@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Box, Flex, useToast } from "@chakra-ui/react";
-import TextInput from '../../../components/TextInput';
-import Button from '../../../components/Button';
-import Link from '../../../components/Link';
-import { POST_SOIL_TYPE } from '../../../constants/apiRoutes';
+import TextInput from '../../../../components/TextInput';
+import Button from '../../../../components/Button';
+import Link from '../../../../components/Link';
+import { POST_SOIL_TYPE } from '../../../../constants/apiRoutes';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import Panel from '../../../components/Panel';
-import { isNullOrEmpty } from '../../../utils/validate';
+import Panel from '../../../../components/Panel';
+import { isNullOrEmpty } from '../../../../utils/validate';
 
 const SoilTypeAddPage = () => {
 

@@ -1,4 +1,4 @@
-import { Box, Flex, Icon, IconButton, InputGroup, InputRightElement, NumberInput, NumberInputField, Text } from "@chakra-ui/react";
+import { Box, Flex, IconButton, InputGroup, InputRightElement, NumberInput, NumberInputField, Text } from "@chakra-ui/react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { useColorModeValue } from "../ColorModeProvider";
 import { MENU_BG_BORDER_DARK_COLOR, MENU_BG_BORDER_LIGHT_COLOR, MENU_TEXT_DARK_COLOR, MENU_TEXT_LIGHT_COLOR } from "../../constants/styleConstants";
@@ -31,22 +31,23 @@ const CoordinateInput = ({ value, onChange, label, placeholder, isRequired, onCl
                     minHeight='40px'
                     maxHeight='70px'
                     placeholder={placeholder}
-                    focusBorderColor={colorMode}
-                    borderWidth={'1.5px'}
-                    borderRadius={'5px'}
                     borderColor={theme == 'light' ? MENU_BG_BORDER_LIGHT_COLOR : MENU_BG_BORDER_DARK_COLOR}
+                    focusBorderColor={colorMode}
                     errorBorderColor='crimson'
                     color={theme == 'light' ? MENU_TEXT_LIGHT_COLOR : MENU_TEXT_DARK_COLOR}
                     isInvalid={isNullOrEmpty(value) && isRequired}
                     value={value}
                     onChange={handleChange}
                 >
-                    <NumberInputField />
+                    <NumberInputField borderWidth={'1.5px'} borderRadius={'5px'}/>
                     <InputRightElement width='4.5rem'>
                         <IconButton
                             onClick={onClick}
                             variant='ghost'
                             icon={<FaMapMarkerAlt />}
+                            color={colorMode}
+                            _hover={{backgroundColor: 'transparent'}}
+                            _focus={{backgroundColor: 'transparent'}}
                         >
                         </IconButton>
                     </InputRightElement>

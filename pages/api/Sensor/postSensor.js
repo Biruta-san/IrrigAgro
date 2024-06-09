@@ -1,3 +1,4 @@
+import { isNotNullOrEmpty } from '../../../src/utils/validate';
 const { connectToDatabase } = require('../../../connectToDatabase');
 
 export default async function handler(req, res) {
@@ -7,26 +8,47 @@ export default async function handler(req, res) {
 
             const data = req.body;
 
+            const treatData = () => {
+                if (isNotNullOrEmpty(data.latitude))
+                    data.latitude = parseFloat(data.latitude);
+                else
+                    data.latitude = null;
+                if (isNotNullOrEmpty(data.longitude))
+                    data.longitude = parseFloat(data.longitude);
+                else
+                    data.longitude = null;
+                if (isNotNullOrEmpty(data.dataInstalacao))
+                    data.dataInstalacao = String(data.dataInstalacao).replace('T', ' ');
+            }
+            treatData();
+
+
             const result = await pool.request()
-                .input('idTipoSensor', data.idTipoSensor)
-                .input('latitude', parseFloat(data.latitude))
-                .input('longitude', parseFloat(data.longitude))
-                .input('idPlanta', data.idPlanta)
                 .input('descricao', data.descricao)
+                .input('idTipoSensor', data.tipoSensorId)
+                .input('latitude', data.latitude)
+                .input('longitude', data.longitude)
+                .input('idPlanta', data.plantaId)
+                .input('idTipoSolo', data.tipoSoloId)
+                .input('dataInstalacao', data.dataInstalacao)
                 .query(
                     `INSERT INTO Sensor (
+                        SESO_Descricao, 
                         TPSE_ID, 
                         SESO_Latitude, 
                         SESO_Longitude, 
                         PLNT_ID, 
-                        SESO_Descricao,
+                        TPSO_ID, 
+                        SESO_DataInstalacao
                     ) 
                     VALUES (
+                        @descricao,
                         @idTipoSensor, 
                         @latitude, 
                         @longitude, 
-                        @idPlanta, 
-                        @descricao
+                        @idPlanta,
+                        @idTipoSolo,
+                        CAST(@dataInstalacao AS DATETIME)
                     )`
                 );
 

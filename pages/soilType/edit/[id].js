@@ -1,6 +1,6 @@
 import axios from "axios";
 import { BASE_ROUTE_SOIL_TYPE } from "../../../src/constants/apiRoutes";
-import SoilTypeEditPage from "../../../src/modules/SoilType/SoilTypeEditPage";
+import SoilTypeEditPage from "../../../src/modules/SoilType/screens/SoilTypeEditPage";
 
 export async function getServerSideProps(context) {
 

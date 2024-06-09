@@ -100,7 +100,7 @@ const MeasureUnitEditPage = ({ id, nome, sigla, descricao }) => {
             </Panel>
             <Panel>
                 <Flex gap="20px" direction={"row"} p={"10px"} justify={"flex-start"} spacing={4}>
-                    <Button isDisabled={isInvalidForm()} onClick={putData} type="submit" isLoading={loading}>Atualizar</Button>
+                    <Button isDisabled={isInvalidForm()} onClick={putData} type="save" isLoading={loading}>Atualizar</Button>
                     <Link href="/measureUnit/search">
                         <Button type="cancel" isLoading={loading}>Cancelar</Button>
                     </Link>

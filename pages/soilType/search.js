@@ -1,5 +1,4 @@
-import { Box } from "@chakra-ui/react"
-import SoilTypeSearchPage from "../../src/modules/SoilType/SoilTypeSearchPage"
+import SoilTypeSearchPage from "../../src/modules/SoilType/screens/SoilTypeSearchPage"
 
 const SoilSearch = () => {
     return (

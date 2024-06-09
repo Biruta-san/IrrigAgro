@@ -2,12 +2,12 @@ import { Box, Flex, useToast } from "@chakra-ui/react";
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import Button from '../../../components/Button';
-import Link from '../../../components/Link';
-import TextInput from '../../../components/TextInput';
-import Panel from "../../../components/Panel";
-import { isNullOrEmpty } from "../../../utils/validate";
-import { BASE_ROUTE_SOIL_TYPE } from "../../../constants/apiRoutes";
+import Button from '../../../../components/Button';
+import Link from '../../../../components/Link';
+import TextInput from '../../../../components/TextInput';
+import Panel from "../../../../components/Panel";
+import { isNullOrEmpty } from "../../../../utils/validate";
+import { BASE_ROUTE_SOIL_TYPE } from "../../../../constants/apiRoutes";
 
 const SoilTypeEditPage = ({ id, nome, descricao }) => {
 
@@ -96,7 +96,7 @@ const SoilTypeEditPage = ({ id, nome, descricao }) => {
             </Panel>
             <Panel>
                 <Flex gap="20px" direction={"row"} p={"10px"} justify={"flex-start"} spacing={4}>
-                    <Button isDisabled={isInvalidForm()} onClick={putData} type="submit" isLoading={loading}>Atualizar</Button>
+                    <Button isDisabled={isInvalidForm()} onClick={putData} type="save" isLoading={loading}>Atualizar</Button>
                     <Link href="/soilType/search">
                         <Button type="cancel" isLoading={loading}>Cancelar</Button>
                     </Link>

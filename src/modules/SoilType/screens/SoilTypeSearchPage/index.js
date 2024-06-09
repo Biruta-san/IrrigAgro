@@ -1,14 +1,14 @@
 import { Box, Flex, Stack, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import Button from '../../../components/Button';
-import Link from '../../../components/Link';
-import TextDescriptionValue from '../../../components/TextDescriptionValue';
-import TextInput from '../../../components/TextInput';
-import DataCard from '../../../patterns/DataCard';
-import { isNotNullOrEmpty } from '../../../utils/validate';
-import Panel from '../../../components/Panel';
-import { GET_SOIL_TYPE } from '../../../constants/apiRoutes';
+import Button from '../../../../components/Button';
+import Link from '../../../../components/Link';
+import TextDescriptionValue from '../../../../components/TextDescriptionValue';
+import TextInput from '../../../../components/TextInput';
+import DataCard from '../../../../patterns/DataCard';
+import { isNotNullOrEmpty } from '../../../../utils/validate';
+import Panel from '../../../../components/Panel';
+import { GET_SOIL_TYPE } from '../../../../constants/apiRoutes';
 
 const SoilTypeSearchPage = () => {
 

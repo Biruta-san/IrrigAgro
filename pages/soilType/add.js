@@ -1,5 +1,4 @@
-import { Box } from "@chakra-ui/react";
-import SoilTypeAddPage from "../../src/modules/SoilType/SoilTypeAddPage";
+import SoilTypeAddPage from "../../src/modules/SoilType/screens/SoilTypeAddPage";
 
 const soilAdd = () => {
     return (
