@@ -4,9 +4,9 @@ import {
     Center,
     Flex,
     FormControl,
-    FormHelperText,
     FormLabel,
-    useDisclosure
+    useDisclosure,
+    useMediaQuery
 } from "@chakra-ui/react";
 import { useRouter } from 'next/router';
 import React, { useState } from "react";
@@ -20,6 +20,9 @@ import { useColorModeValue } from "../../../components/ColorModeProvider";
 import Alert from "../../../components/Alert";
 
 const Login = () => {
+
+    const [isLargerThan550] = useMediaQuery('(min-width: 550px)');
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -118,7 +121,7 @@ const Login = () => {
             {isOpen && <RegisterAlert />}
             <Center h="100vh">
                 <Panel
-                    w='50vw'>
+                    w={isLargerThan550 ? '50vw' : '100%'}>
                     <Flex
                         direction={'column'}
                         align={'center'}
@@ -137,7 +140,6 @@ const Login = () => {
                                         onChange={(e) => handleEmail(e)}
                                         onKeyDown={handleKeyPress} // Attach event handler here
                                     />
-                                    <FormHelperText>Nunca iremos compartilhar seu email</FormHelperText>
                                 </Box>
                                 <Box w='100%'>
                                     <FormLabel color={theme == 'light' ? MENU_TEXT_LIGHT_COLOR : MENU_TEXT_DARK_COLOR}>Senha</FormLabel>

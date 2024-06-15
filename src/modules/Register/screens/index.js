@@ -3,10 +3,10 @@ import {
     Box,
     FormControl,
     FormLabel,
-    FormHelperText,
     Flex,
     Center,
-    useDisclosure
+    useDisclosure,
+    useMediaQuery
 } from "@chakra-ui/react";
 import { MENU_TEXT_DARK_COLOR, MENU_TEXT_LIGHT_COLOR } from "../../../constants/styleConstants";
 import PasswordInput from "../../../components/PasswordInput";
@@ -20,6 +20,8 @@ import Panel from "../../../components/Panel";
 import Alert from "../../../components/Alert";
 
 const Register = () => {
+
+    const [isLargerThan550] = useMediaQuery('(min-width: 550px)');
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -125,7 +127,7 @@ const Register = () => {
             {isOpen && <RegisterAlert />}
             <Center h="100vh">
                 <Panel
-                    w='50vw'>
+                    w={isLargerThan550 ? '50vw' : '100%'}>
                     <Flex
                         direction={'column'}
                         align={'center'}
@@ -148,7 +150,6 @@ const Register = () => {
                                         onKeyDown={handleKeyPress}
                                         onChange={(e) => handleEmail(e)}
                                     />
-                                    <FormHelperText>Nunca iremos compartilhar seu email</FormHelperText>
                                 </Box>
                                 <Box
                                     w='100%'
