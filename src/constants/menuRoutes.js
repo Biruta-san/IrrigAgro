@@ -2,7 +2,7 @@ import { FaTemperatureHigh } from "react-icons/fa";
 import { SiPowerbi } from "react-icons/si";
 import { MdOutlineSensors } from "react-icons/md";
 import { RiPlantFill } from "react-icons/ri";
-import { BsGraphUpArrow } from "react-icons/bs";
+import { BsGraphUpArrow, BsFillClipboardDataFill } from "react-icons/bs";
 import { TbRulerMeasure } from "react-icons/tb";
 import { FaMountainSun } from "react-icons/fa6";
 
@@ -70,13 +70,21 @@ const menus = [
         icon: MdOutlineSensors,
         href: "/sensor/search",
         isVisible: true,
-    }, 
+    },
     {
         id: 9,
         name: "Relatórios",
         description: "Esta tela é utilizada para consultar relatórios",
         icon: SiPowerbi,
         href: "/reports",
+        isVisible: false,
+    },
+    {
+        id: 10,
+        name: "Dados de Sensores",
+        description: "Esta tela é utilizada para consultar os Dados de Sensores",
+        icon: BsFillClipboardDataFill,
+        href: "/sensorData/search",
         isVisible: true,
     }
 ];

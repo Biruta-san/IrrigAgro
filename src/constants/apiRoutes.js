@@ -11,6 +11,7 @@ export const POST_FAZENDAS = `${API_BASE_ROUTE}/Farm/postFazenda`;
 export const BASE_ROUTE_SENSOR = `${API_BASE_ROUTE}/Sensor`
 export const GET_SENSORES = `${BASE_ROUTE_SENSOR}/getAllSensores`;
 export const POST_SENSOR = `${BASE_ROUTE_SENSOR}/postSensor`;
+export const LIST_SENSOR = `${BASE_ROUTE_SENSOR}/list`;
 
 /* Rotas de API de Plantas */
 export const BASE_ROUTE_PLANTA = `${API_BASE_ROUTE}/Plant`
@@ -35,3 +36,7 @@ export const BASE_ROUTE_SENSOR_TYPE = `${API_BASE_ROUTE}/SensorType`
 export const GET_SENSOR_TYPE = `${BASE_ROUTE_SENSOR_TYPE}/getAllSensorTypes`;
 export const POST_SENSOR_TYPE = `${BASE_ROUTE_SENSOR_TYPE}/postSensorType`;
 export const LIST_SENSOR_TYPE = `${BASE_ROUTE_SENSOR_TYPE}/list`;
+
+/* Rotas de API de Dados Sensores */
+export const BASE_ROUTE_DATA = `${API_BASE_ROUTE}/SensorData`
+export const GET_DATA = `${BASE_ROUTE_DATA}/getAllData`;
