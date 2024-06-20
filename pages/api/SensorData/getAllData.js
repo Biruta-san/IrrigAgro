@@ -13,7 +13,7 @@ export default async function handler(req, res) {
             .input('plantaId', params?.plantaId)
             .input('tipoSoloId', params?.tipoSoloId)
             .input('sensorId', params?.sensorId)
-            .query(`SELECT ISNULL(T0.DDSE_ID, 0) AS DDSE_ID, 
+            .query(`SELECT TOP 100 ISNULL(T0.DDSE_ID, 0) AS DDSE_ID, 
                            ISNULL(T1.SESO_Descricao,\'\') AS SESO_Descricao, 
                            ISNULL(T2.TPSE_Nome, \'\') AS TPSE_Nome, 
                            ISNULL(T3.PLNT_Nome, \'\') AS PLNT_Nome, 
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
                   AND (T2.TPSE_ID = ISNULL(@tipoSensorId, 0) OR ISNULL(@tipoSensorId,0) = 0)
                   AND (T3.PLNT_ID = ISNULL(@plantaId, 0) OR ISNULL(@plantaId,0) = 0)
                   AND (T4.TPSO_ID = ISNULL(@tipoSoloId, 0) OR ISNULL(@tipoSoloId,0) = 0)
-                `);
+                ORDER BY T0.DDSE_DataExecucao DESC;`);
 
         res.status(200).json({ status: 1, rowCount: result.recordset.length, rows: result.recordset, message: 'Dado(s) retornado(s) com sucesso' });
     } catch (error) {
