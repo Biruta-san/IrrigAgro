@@ -265,9 +265,6 @@ const SensorDataSearchPage = () => {
                     </Flex>
                     <Flex direction={'row'} gap={'10px'}>
                         <Button onClick={getData} type="search" isLoading={loading}>Pesquisar</Button>
-                        <Link href="/sensor/add">
-                            <Button type="submit">Adicionar</Button>
-                        </Link>
                     </Flex>
                 </Flex>
             </Panel>
